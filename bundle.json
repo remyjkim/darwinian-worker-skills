@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "bundleName": "darwinian-harness-skills",
+  "version": "0.1.0",
+  "displayName": "Darwinian Harness Skills",
+  "description": "Agent skills for operating Darwinian Harness through the drwn CLI.",
+  "skills": [
+    {
+      "name": "bootstrap-project",
+      "scope": "shared",
+      "path": "skills/bootstrap-project"
+    },
+    {
+      "name": "apply-harness-card",
+      "scope": "shared",
+      "path": "skills/apply-harness-card"
+    },
+    {
+      "name": "author-harness-card",
+      "scope": "shared",
+      "path": "skills/author-harness-card"
+    },
+    {
+      "name": "install-harness-project",
+      "scope": "shared",
+      "path": "skills/install-harness-project"
+    },
+    {
+      "name": "inspect-harness",
+      "scope": "shared",
+      "path": "skills/inspect-harness"
+    },
+    {
+      "name": "materialize-harness",
+      "scope": "shared",
+      "path": "skills/materialize-harness"
+    },
+    {
+      "name": "manage-harness-library",
+      "scope": "shared",
+      "path": "skills/manage-harness-library"
+    },
+    {
+      "name": "repair-harness",
+      "scope": "shared",
+      "path": "skills/repair-harness"
+    },
+    {
+      "name": "manage-defaults",
+      "scope": "shared",
+      "path": "skills/manage-defaults"
+    },
+    {
+      "name": "recommend-harness",
+      "scope": "shared",
+      "path": "skills/recommend-harness"
+    },
+    {
+      "name": "share-harness-card",
+      "scope": "shared",
+      "path": "skills/share-harness-card"
+    },
+    {
+      "name": "support-harness",
+      "scope": "shared",
+      "path": "skills/support-harness"
+    },
+    {
+      "name": "organize-workspace",
+      "scope": "experimental",
+      "path": "skills/organize-workspace"
+    }
+  ]
+}
