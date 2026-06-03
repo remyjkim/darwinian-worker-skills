@@ -1,0 +1,138 @@
+---
+name: author-harness-card
+description: "Use when creating, editing, publishing, diffing, inspecting, or deprecating reusable Darwinian Harness Cards from a local card source."
+---
+
+# author-harness-card
+
+## Purpose
+
+Drive the card authoring lifecycle. `drwn card new` creates an editable source
+under `~/.agents/drwn/sources/<scope>/<name>/`; `drwn card source ...`
+inspects and mutates that source; `drwn card publish` snapshots it into the
+immutable local card store. Published-card commands such as `card show`,
+`card diff`, `card validate`, and `card deprecate` operate on released refs.
+
+Requires `drwn` on PATH. Scope is card source. Blast radius is medium because
+this skill creates source folders, publishes immutable versions, and can mark
+versions deprecated.
+
+## Procedure
+
+1. Disambiguate the user's intent:
+   - Create a new source: `drwn card new`
+   - Inspect an editable source: `drwn card source show --json`
+   - Diagnose an editable source: `drwn card source doctor --json`
+   - Add or remove bundled skills: `drwn card source add-skill` or
+     `drwn card source remove-skill`
+   - Add or remove bundled MCP definitions: `drwn card source add-mcp` or
+     `drwn card source remove-mcp`
+   - Update source metadata: `drwn card source set`
+   - Capture the current project as a source: `drwn card new --from-project`
+   - Publish a source: `drwn card publish`
+   - Inspect a published card: `drwn card show --json`
+   - Compare versions: `drwn card diff --json`
+   - Validate a ref: `drwn card validate --json`
+   - Deprecate a version: `drwn card deprecate`
+2. For `card new`:
+   1. Confirm the desired card name.
+   2. If the name is unscoped, ask for an explicit `--scope=<scope>` or ask
+      the user to provide a fully-qualified name. There is no dedicated
+      read-only CLI command for checking saved `authoring.scope`.
+   3. On approval, run `drwn card new <name> [--scope <scope>] [--no-git]`.
+   4. Run `drwn card source show <name> --json` and summarize the created
+      source path and skeleton files.
+3. For source inspection, run `drwn card source show <name> --json`.
+4. For source diagnostics, run `drwn card source doctor [name] --json`.
+   Treat `ok: false` as reportable source work, not a command failure.
+5. For `card new --from-project`:
+   1. Run `drwn status --json` to confirm the source project state.
+   2. Confirm the target card name and scope.
+   3. Explain that `drwn` will copy active skill content and MCP definitions
+      into a mutable source under `~/.agents/drwn/sources/...`.
+   4. On approval, run
+      `drwn card new <name> --from-project [projectPath] [--scope <scope>]`.
+   5. Run `drwn card source doctor <name> --json`.
+6. For adding a bundled skill:
+   1. Resolve whether the skill should come from the local library/repo by
+      name or from an explicit directory with `--from <path>`.
+   2. Run `drwn card source add-skill <card> <skill> [--from <path>] --dry-run --json`.
+   3. Show the planned copy and manifest change.
+   4. On approval, run the same command without `--dry-run`. Use `--replace`
+      only after confirming overwrite intent.
+7. For removing a bundled skill:
+   1. Run `drwn card source remove-skill <card> <skill> --dry-run --json`.
+   2. Show whether files and the manifest entry will be removed.
+   3. On approval, run the same command without `--dry-run`. Use
+      `--keep-files` only when the user wants a manifest-only removal.
+8. For adding or removing MCP definitions, follow the same dry-run, summarize,
+   approve, execute pattern with `drwn card source add-mcp` and
+   `drwn card source remove-mcp`. Use `--from <json-file>` for explicit MCP
+   definition files and `--replace` only after confirming overwrite intent.
+9. For source metadata, run `drwn card source set <card> ... --dry-run --json`
+   first, then apply after approval. Supported fields include description,
+   version, license, harness min version, stability, last validated version,
+   and test status badge.
+10. For `card publish`:
+    1. Run `drwn card source doctor <name> --json`.
+    2. If `ok` is false, summarize the issues and stop before publishing.
+    3. Run `drwn card source show <name> --json` and confirm the card name and
+       version declared in the source manifest.
+    4. On approval, run `drwn card publish <name>`.
+    5. Verify the published ref with `drwn card validate <name>@<version> --json`.
+11. For `card show`, run `drwn card show <ref> --json`.
+12. For `card diff`, run `drwn card diff <before> <after> --json`.
+13. For `card deprecate`:
+    1. Confirm the exact version and message.
+    2. Run `drwn card deprecate <ref> --message "<reason>"`.
+14. If the user asks to push, fetch, clone, or manage card remotes, stop after
+    publication and redirect to `share-harness-card`.
+
+## User-Ask Points
+
+1. Confirm card name and scope for `card new`.
+2. Confirm project capture before `card new --from-project`.
+3. Confirm every non-dry-run source mutation after reviewing the dry-run JSON.
+4. Confirm `--replace`, `--keep-files`, and deprecation message choices
+   explicitly.
+5. Confirm publish target and immutable version before `drwn card publish`.
+6. Confirm deprecation target and message before `drwn card deprecate`.
+
+## Wraps
+
+`drwn status --json`, `drwn card new`,
+`drwn card new --from-project`, `drwn card source list`,
+`drwn card source show --json`, `drwn card source doctor --json`,
+`drwn card source add-skill --dry-run --json`,
+`drwn card source add-skill`, `drwn card source remove-skill --dry-run --json`,
+`drwn card source remove-skill`, `drwn card source set --dry-run --json`,
+`drwn card source set`, `drwn card source add-mcp --dry-run --json`,
+`drwn card source add-mcp`, `drwn card source remove-mcp --dry-run --json`,
+`drwn card source remove-mcp`, `drwn card publish`, `drwn card show --json`,
+`drwn card diff --json`, `drwn card validate --json`, `drwn card deprecate`
+
+## Scope
+
+Card source and local immutable store.
+
+## Failure Modes
+
+- Unscoped name without scope: ask again for `--scope` or a fully-qualified
+  name.
+- Existing version on publish: use `drwn card source set <name> --version ...`
+  to bump the source version first.
+- Project capture finds unresolved effective state: repair or materialize the
+  source project before capturing.
+- Invalid source `card.json`: surface the source doctor or source show error
+  verbatim.
+- Duplicate bundled skill or MCP server: rerun with `--replace` only after the
+  user confirms overwrite intent.
+- `DRWN_STORE_READONLY=1`: inspection and dry-run commands can still run, but
+  real source mutations and publish commands must stop before writing.
+
+## Related Skills
+
+- `apply-harness-card`
+- `inspect-harness`
+- `manage-defaults`
+- `share-harness-card`

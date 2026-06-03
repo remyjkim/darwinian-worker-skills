@@ -1,0 +1,22 @@
+{
+  "name": "@darwinian/harness-skills",
+  "version": "0.1.0",
+  "description": "Stable Darwinian Harness card bundling current-lane project setup, install, materialization, cards, library, defaults, diagnostics, support, repair, and recommendation skills.",
+  "skills": {
+    "include": [
+      "bootstrap-project",
+      "apply-harness-card",
+      "author-harness-card",
+      "install-harness-project",
+      "inspect-harness",
+      "materialize-harness",
+      "manage-harness-library",
+      "repair-harness",
+      "manage-defaults",
+      "recommend-harness",
+      "share-harness-card",
+      "support-harness"
+    ]
+  },
+  "servers": {}
+}

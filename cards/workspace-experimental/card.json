@@ -1,0 +1,11 @@
+{
+  "name": "@darwinian/workspace-experimental",
+  "version": "0.1.0",
+  "description": "Experimental Darwinian Harness card bundling only the future workspace organizer stub.",
+  "skills": {
+    "include": [
+      "organize-workspace"
+    ]
+  },
+  "servers": {}
+}
