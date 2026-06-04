@@ -56,12 +56,19 @@ versions deprecated.
    4. Run `drwn card source show @<login>/<name> --json` and summarize the
       created source path and skeleton files. Always pass the fully-qualified
       name `@<scope>/<name>` — bare names are not resolved by `card source show`.
-   5. Generate a `README.md` in the created source folder
+   5. Before generating the README, collect the following from the user if not
+      already known from context. Ask for all missing fields in a single
+      message rather than one at a time:
+      - One-sentence value proposition (what does this card do?)
+      - 2–3 capability bullet points (what it does)
+      - Who it is recommended for (audience / context)
+      - License (e.g. MIT, Apache-2.0, or "Proprietary")
+      Populate the "What's included" table directly from the `bundledSkills`
+      and `mcpServers` arrays returned by `drwn card source show --json`; omit
+      the placeholder row if there is at least one real entry.
+      Then generate a `README.md` in the created source folder
       (`~/.agents/drwn/sources/<scope>/<name>/README.md`) using the template
-      below. Fill in `<name>`, `<scope>`, `<owner>`, and the one-sentence
-      value proposition from context; ask the user if the purpose is not
-      clear. The "What's included" table and Versions table start as
-      placeholders for the author to fill in as the card evolves.
+      below with all fields filled in.
 
       ````markdown
       # <name>
