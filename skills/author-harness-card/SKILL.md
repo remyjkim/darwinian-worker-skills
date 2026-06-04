@@ -42,26 +42,36 @@ versions deprecated.
    - Deprecate a version: `drwn card deprecate`
 3. For `card new`:
    1. Confirm the desired card name.
-   2. If the name is unscoped, resolve a default scope from the authenticated
-      GitHub identity:
-      1. Run `gh api user --jq .login`. If it succeeds, propose
-         `@<login>/<name>` as the default scope so the card namespace matches
-         the author's GitHub account and avoids future marketplace conflicts.
-      2. If `gh` is unavailable or returns an error, ask the user to provide
-         an explicit `--scope=@<scope>`. Do not fall back to `@me` as a scope
-         because `@me` collides across users in a shared marketplace.
-   3. On approval, run `drwn card new <name> --scope @<login> [--no-git]`.
-      The `--scope` value must include the `@` prefix (e.g. `@acme`);
-      `drwn` rejects bare usernames without it.
-   4. Run `drwn card source show @<login>/<name> --json` and summarize the
+   2. If the name is unscoped, let `drwn card new` resolve a default scope
+      itself rather than pre-probing on the agent side. The CLI probes
+      `gh api user -q .login`, then `git config --global github.user`, then
+      the local-part of `git config --global user.email`, and either prompts
+      the user in a TTY or (in the non-TTY contexts typical of agent
+      invocations) exits with a hint naming the detected handle so the
+      caller can rerun with `--scope @<handle>`.
+      1. Run `drwn card new <name> [--no-git]` and capture stderr.
+      2. If stderr contains a `Detected @<handle>` hint, use
+         `AskUserQuestion` to confirm the suggested handle (or let the user
+         supply a different `@<scope>`), then rerun with
+         `--scope @<handle> [--no-git]`. The `--scope` value must include
+         the `@` prefix (e.g. `@acme`); `drwn` rejects bare names.
+      3. If stderr says no handle could be derived from `gh` or `git config`,
+         use `AskUserQuestion` to ask the user for an explicit
+         `--scope=@<scope>`. Never propose `@me`: it collides across users
+         in shared marketplaces.
+      4. If `machine.authoring.scope` is already saved from a previous
+         `drwn card new`, the CLI uses it silently — no rerun is needed.
+   3. Run `drwn card source show @<scope>/<name> --json` and summarize the
       created source path and skeleton files. Always pass the fully-qualified
       name `@<scope>/<name>` — bare names are not resolved by `card source show`.
-   5. Use `AskUserQuestion` to ask how README content should be sourced.
+   4. Use `AskUserQuestion` to ask how README content should be sourced.
       Always offer all three options regardless of whether skills are bundled:
       - **Auto-generate** — read each bundled skill's `SKILL.md` and derive
         the value proposition, capabilities, and audience. Present the draft
-        for confirmation before writing. If no skills are bundled yet, inform
-        the user and ask them to add skills first or switch to manual entry.
+        for confirmation before writing. On a fresh `drwn card new` there
+        are no bundled skills yet; in that case inform the user and ask
+        them to add skills first via `drwn card source add-skill` or switch
+        to manual entry.
       - **Enter manually** — collect value proposition, 2–3 capabilities,
         audience, and license in a single `AskUserQuestion` prompt.
       - **Skip for now** — write the README later after bundling skills.
@@ -128,9 +138,9 @@ Use the `AskUserQuestion` tool at every point below so the user can respond
 with clickable options rather than typing from scratch. Never ask multiple
 separate questions sequentially when they can be batched into one prompt.
 
-1. Confirm card name and scope for `card new`; when a GitHub username is
-   resolved automatically, confirm the proposed `@<login>/<name>` scope before
-   running `drwn card new`.
+1. Confirm card name and scope for `card new`. When the CLI's first run
+   surfaces a `Detected @<handle>` hint, confirm the suggested handle (or
+   accept an override) before rerunning with `--scope @<handle>`.
 2. Choose README content source: auto-generate from bundled skills or enter
    manually.
 3. Confirm auto-generated README draft before writing, or trigger manual entry.
@@ -143,7 +153,7 @@ separate questions sequentially when they can be batched into one prompt.
 
 ## Wraps
 
-`command -v drwn`, `drwn --version`, `drwn status --json`, `gh api user --jq .login`, `drwn card new`,
+`command -v drwn`, `drwn --version`, `drwn status --json`, `drwn card new`,
 `drwn card new --from-project`, `drwn card source list`,
 `drwn card source show --json`, `drwn card source doctor --json`,
 `drwn card source add-skill --dry-run --json`,
@@ -161,13 +171,13 @@ push, fetch, and clone belong to `share-harness-card`.
 
 ## Failure Modes
 
-- Unscoped name without scope: attempt to resolve via `gh api user --jq .login`
-  and propose `@<login>/<name>`; if `gh` is unavailable or not authenticated,
-  ask the user for an explicit `--scope`. The scope value passed to `drwn` must
-  include the `@` prefix (e.g. `--scope @acme`); bare names are rejected.
-  Never default to `@me`.
-- `gh api user` fails mid-flow: fall back to asking the user for a scope; do
-  not block the rest of the `card new` steps.
+- Unscoped name without scope: read the CLI's stderr from the first
+  `drwn card new` run. If it contains `Detected @<handle>`, confirm with the
+  user and rerun with `--scope @<handle>`. If it says no handle could be
+  derived, ask the user for an explicit `--scope=@<scope>`. The scope value
+  passed to `drwn` must include the `@` prefix (e.g. `--scope @acme`); bare
+  names are rejected. Never propose `@me` — it collides across users in
+  shared marketplaces.
 - Existing version on publish: use `drwn card source set <name> --version ...`
   to bump the source version first.
 - Project capture finds unresolved effective state: repair or materialize the

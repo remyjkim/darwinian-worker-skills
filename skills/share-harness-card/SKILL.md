@@ -38,11 +38,14 @@ commands mutate local bare card repos and may push or fetch remote Git refs.
       not create hosted Git repositories.
    2. Run `gh auth status`. If it fails, ask the user to log in or provide an
       existing Git remote URL; do not attempt credential repair.
-   3. Derive the default `<owner>/<repo>` from the card ref: owner is the scope
-      without `@` (e.g. `@acme` → `acme`; fallback to `gh api user --jq .login`
-      if the scope is not a valid GitHub user or org); repo name is the bare
-      card name (e.g. `@acme/my-card` → `my-card`). Confirm with the user via
-      `AskUserQuestion` before proceeding.
+   3. Derive the default `<owner>/<repo>` from the card ref: owner is the
+      scope without `@` (e.g. `@acme` → `acme`); repo name is the bare card
+      name (e.g. `@acme/my-card` → `my-card`). Confirm with the user via
+      `AskUserQuestion` before proceeding. The next `gh repo view` step
+      surfaces a 404 naturally when the scope does not map to a real GitHub
+      user or organization; at that point use `AskUserQuestion` to ask the
+      user for an explicit owner (which may be the authenticated identity
+      from `gh api user --jq .login`).
    4. Run `gh repo view <owner>/<repo> --json nameWithOwner,visibility,url,sshUrl`.
       If the repository exists, inspect it and confirm reuse before changing
       any card remote.
