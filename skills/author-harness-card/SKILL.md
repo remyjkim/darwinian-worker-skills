@@ -48,11 +48,14 @@ versions deprecated.
          `@<login>/<name>` as the default scope so the card namespace matches
          the author's GitHub account and avoids future marketplace conflicts.
       2. If `gh` is unavailable or returns an error, ask the user to provide
-         an explicit `--scope=<scope>`. Do not fall back to `@me` as a scope
+         an explicit `--scope=@<scope>`. Do not fall back to `@me` as a scope
          because `@me` collides across users in a shared marketplace.
-   3. On approval, run `drwn card new <name> [--scope <scope>] [--no-git]`.
-   4. Run `drwn card source show <name> --json` and summarize the created
-      source path and skeleton files.
+   3. On approval, run `drwn card new <name> --scope @<login> [--no-git]`.
+      The `--scope` value must include the `@` prefix (e.g. `@junggyubae`);
+      `drwn` rejects bare usernames without it.
+   4. Run `drwn card source show @<login>/<name> --json` and summarize the
+      created source path and skeleton files. Always pass the fully-qualified
+      name `@<scope>/<name>` — bare names are not resolved by `card source show`.
    5. Generate a `README.md` in the created source folder
       (`~/.agents/drwn/sources/<scope>/<name>/README.md`) using the template
       below. Fill in `<name>`, `<scope>`, `<owner>`, and the one-sentence
@@ -201,7 +204,9 @@ push, fetch, and clone belong to `share-harness-card`.
 
 - Unscoped name without scope: attempt to resolve via `gh api user --jq .login`
   and propose `@<login>/<name>`; if `gh` is unavailable or not authenticated,
-  ask the user for an explicit `--scope`. Never default to `@me`.
+  ask the user for an explicit `--scope`. The scope value passed to `drwn` must
+  include the `@` prefix (e.g. `--scope @username`); bare names are rejected.
+  Never default to `@me`.
 - `gh api user` fails mid-flow: fall back to asking the user for a scope; do
   not block the rest of the `card new` steps.
 - Existing version on publish: use `drwn card source set <name> --version ...`
