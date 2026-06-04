@@ -56,13 +56,15 @@ versions deprecated.
    4. Run `drwn card source show @<login>/<name> --json` and summarize the
       created source path and skeleton files. Always pass the fully-qualified
       name `@<scope>/<name>` — bare names are not resolved by `card source show`.
-   5. Use `AskUserQuestion` to ask how README content should be sourced:
+   5. Use `AskUserQuestion` to ask how README content should be sourced.
+      Always offer all three options regardless of whether skills are bundled:
       - **Auto-generate** — read each bundled skill's `SKILL.md` and derive
         the value proposition, capabilities, and audience. Present the draft
-        for confirmation before writing. Fall back to manual if no skills are
-        bundled yet.
+        for confirmation before writing. If no skills are bundled yet, inform
+        the user and ask them to add skills first or switch to manual entry.
       - **Enter manually** — collect value proposition, 2–3 capabilities,
         audience, and license in a single `AskUserQuestion` prompt.
+      - **Skip for now** — write the README later after bundling skills.
       Populate "What's included" from `bundledSkills` and `mcpServers` in
       `drwn card source show --json`. Write the completed README to
       `~/.agents/drwn/sources/<scope>/<name>/README.md` using the template
