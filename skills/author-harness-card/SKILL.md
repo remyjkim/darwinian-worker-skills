@@ -42,12 +42,77 @@ versions deprecated.
    - Deprecate a version: `drwn card deprecate`
 3. For `card new`:
    1. Confirm the desired card name.
-   2. If the name is unscoped, ask for an explicit `--scope=<scope>` or ask
-      the user to provide a fully-qualified name. There is no dedicated
-      read-only CLI command for checking saved `authoring.scope`.
+   2. If the name is unscoped, resolve a default scope from the authenticated
+      GitHub identity:
+      1. Run `gh api user --jq .login`. If it succeeds, propose
+         `@<login>/<name>` as the default scope so the card namespace matches
+         the author's GitHub account and avoids future marketplace conflicts.
+      2. If `gh` is unavailable or returns an error, ask the user to provide
+         an explicit `--scope=<scope>`. Do not fall back to `@me` as a scope
+         because `@me` collides across users in a shared marketplace.
    3. On approval, run `drwn card new <name> [--scope <scope>] [--no-git]`.
    4. Run `drwn card source show <name> --json` and summarize the created
       source path and skeleton files.
+   5. Generate a `README.md` in the created source folder
+      (`~/.agents/drwn/sources/<scope>/<name>/README.md`) using the template
+      below. Fill in `<name>`, `<scope>`, `<owner>`, and the one-sentence
+      value proposition from context; ask the user if the purpose is not
+      clear. The "What's included" table and Versions table start as
+      placeholders for the author to fill in as the card evolves.
+
+      ````markdown
+      # <name>
+
+      > <one-sentence value proposition>
+
+      ## What it does
+
+      - <capability 1>
+      - <capability 2>
+
+      ## Recommended for users who...
+
+      - <user profile or context>
+
+      ## What's included
+
+      | Asset | Purpose |
+      |---|---|
+      | `SKILL.md` | Agent-facing instructions |
+      | _(add rows as you bundle skills and MCPs)_ | |
+
+      ## Installation
+
+      Clone the card to your local store:
+
+      ```sh
+      drwn card clone github:<owner>/<name>#v<version>
+      ```
+
+      Apply to your project:
+
+      ```sh
+      drwn card apply <scope>/<name>@<version>
+      ```
+
+      ## Versions
+
+      | Version | Notes |
+      |---|---|
+      | v0.1.0 | Initial release |
+
+      ## Requirements
+
+      - [`drwn`](https://darwiniantools.com) CLI installed
+
+      ## License
+
+      <license>
+
+      ---
+
+      See the [Darwinian Tools documentation](https://docs.darwiniantools.com) for more information on drwn harness cards, installation, version pinning, and project configuration.
+      ````
 4. For source inspection, run `drwn card source show <name> --json`.
 5. For source diagnostics, run `drwn card source doctor [name] --json`.
    Treat `ok: false` as reportable source work, not a command failure.
@@ -103,7 +168,9 @@ versions deprecated.
 
 ## User-Ask Points
 
-1. Confirm card name and scope for `card new`.
+1. Confirm card name and scope for `card new`; when a GitHub username is
+   resolved automatically, confirm the proposed `@<login>/<name>` scope before
+   running `drwn card new`.
 2. Confirm project capture before `card new --from-project`.
 3. Confirm every non-dry-run source mutation after reviewing the dry-run JSON.
 4. Confirm `--replace`, `--keep-files`, and deprecation message choices
@@ -114,7 +181,7 @@ versions deprecated.
 
 ## Wraps
 
-`command -v drwn`, `drwn --version`, `drwn status --json`, `drwn card new`,
+`command -v drwn`, `drwn --version`, `drwn status --json`, `gh api user --jq .login`, `drwn card new`,
 `drwn card new --from-project`, `drwn card source list`,
 `drwn card source show --json`, `drwn card source doctor --json`,
 `drwn card source add-skill --dry-run --json`,
@@ -132,8 +199,11 @@ push, fetch, and clone belong to `share-harness-card`.
 
 ## Failure Modes
 
-- Unscoped name without scope: ask again for `--scope` or a fully-qualified
-  name.
+- Unscoped name without scope: attempt to resolve via `gh api user --jq .login`
+  and propose `@<login>/<name>`; if `gh` is unavailable or not authenticated,
+  ask the user for an explicit `--scope`. Never default to `@me`.
+- `gh api user` fails mid-flow: fall back to asking the user for a scope; do
+  not block the rest of the `card new` steps.
 - Existing version on publish: use `drwn card source set <name> --version ...`
   to bump the source version first.
 - Project capture finds unresolved effective state: repair or materialize the
