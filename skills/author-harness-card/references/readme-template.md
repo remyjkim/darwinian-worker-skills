@@ -11,13 +11,6 @@
 
 - <user profile or context>
 
-## What's included
-
-| Asset | Purpose |
-|---|---|
-| `SKILL.md` | Agent-facing instructions |
-| _(add rows as you bundle skills and MCPs)_ | |
-
 ## Installation
 
 Clone the card to your local store:
@@ -32,19 +25,18 @@ Apply to your project:
 drwn card apply <scope>/<name>@<version>
 ```
 
+## What's included
+
+| Asset | Purpose |
+|---|---|
+| `SKILL.md` | Agent-facing instructions |
+| _(add rows as you bundle skills and MCPs)_ | |
+
 ## Versions
 
 | Version | Notes |
 |---|---|
 | v1.0.0 | Initial release |
-
-## Requirements
-
-- [`drwn`](https://darwiniantools.com) CLI installed
-
-## License
-
-<license>
 
 ---
 

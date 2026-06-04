@@ -38,13 +38,20 @@ commands mutate local bare card repos and may push or fetch remote Git refs.
       not create hosted Git repositories.
    2. Run `gh auth status`. If it fails, ask the user to log in or provide an
       existing Git remote URL; do not attempt credential repair.
-   3. Run `gh repo view <owner>/<repo> --json nameWithOwner,visibility,url,sshUrl`.
+   3. Derive the default GitHub repository name from the card ref:
+      - Owner: the scope without the `@` prefix (e.g. `@jgb` → `jgb`).
+        If the scope does not map to a valid GitHub user or org, fall back to
+        the authenticated user from `gh api user --jq .login`.
+      - Repo name: the card name without the scope (e.g. `@jgb/test2` → `test2`).
+      Present the proposed `<owner>/<repo>` to the user for confirmation via
+      `AskUserQuestion` before creating.
+   4. Run `gh repo view <owner>/<repo> --json nameWithOwner,visibility,url,sshUrl`.
       If the repository exists, inspect it and confirm reuse before changing
       any card remote.
-   4. If the repository does not exist and the user approves, run
+   5. If the repository does not exist and the user approves, run
       `gh repo create <owner>/<repo> --private` or `--public` according to the
       requested visibility.
-   5. Verify with `gh repo view <owner>/<repo> --json nameWithOwner,visibility,url,sshUrl`.
+   6. Verify with `gh repo view <owner>/<repo> --json nameWithOwner,visibility,url,sshUrl`.
 6. For remote add, set, or remove:
    1. Run `drwn card remote list <name> --json` first.
    2. Explain the exact remote name and URL mutation. Remote commands do not
