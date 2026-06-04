@@ -56,82 +56,17 @@ versions deprecated.
    4. Run `drwn card source show @<login>/<name> --json` and summarize the
       created source path and skeleton files. Always pass the fully-qualified
       name `@<scope>/<name>` — bare names are not resolved by `card source show`.
-   5. Before generating the README, use `AskUserQuestion` to ask how the
-      content should be sourced — present two options:
-      - **Auto-generate** — read each bundled skill's `SKILL.md` (from
-        `~/.agents/drwn/sources/<scope>/<name>/skills/<skill>/SKILL.md`) and
-        derive the value proposition, capabilities, and audience from the
-        skill descriptions and purpose sections. Present the drafted content
-        to the user for confirmation or editing before writing the file.
-        If no skills are bundled yet, fall back to asking the user directly.
-      - **Enter manually** — use `AskUserQuestion` to collect the following
-        fields in a single prompt (never ask one field at a time):
-        - One-sentence value proposition
-        - 2–3 capability bullet points
-        - Who it is recommended for
-        - License (offer common choices: MIT, Apache-2.0, Proprietary, Other)
-      Populate the "What's included" table from the `bundledSkills` and
-      `mcpServers` arrays in `drwn card source show --json`; omit the
-      placeholder row when at least one real entry exists.
-      Then generate a `README.md` in the created source folder
-      (`~/.agents/drwn/sources/<scope>/<name>/README.md`) using the template
-      below with all fields filled in. Use `AskUserQuestion` at every
-      decision point that requires user input so the user can respond with
-      clickable options rather than typing from scratch.
-
-      ````markdown
-      # <name>
-
-      > <one-sentence value proposition>
-
-      ## What it does
-
-      - <capability 1>
-      - <capability 2>
-
-      ## Recommended for users who...
-
-      - <user profile or context>
-
-      ## What's included
-
-      | Asset | Purpose |
-      |---|---|
-      | `SKILL.md` | Agent-facing instructions |
-      | _(add rows as you bundle skills and MCPs)_ | |
-
-      ## Installation
-
-      Clone the card to your local store:
-
-      ```sh
-      drwn card clone github:<owner>/<name>#v<version>
-      ```
-
-      Apply to your project:
-
-      ```sh
-      drwn card apply <scope>/<name>@<version>
-      ```
-
-      ## Versions
-
-      | Version | Notes |
-      |---|---|
-      | v0.1.0 | Initial release |
-
-      ## Requirements
-
-      - [`drwn`](https://darwiniantools.com) CLI installed
-
-      ## License
-
-      <license>
-
-      ---
-
-      See the [Darwinian Tools documentation](https://docs.darwiniantools.com) for more information on drwn harness cards, installation, version pinning, and project configuration.
-      ````
+   5. Use `AskUserQuestion` to ask how README content should be sourced:
+      - **Auto-generate** — read each bundled skill's `SKILL.md` and derive
+        the value proposition, capabilities, and audience. Present the draft
+        for confirmation before writing. Fall back to manual if no skills are
+        bundled yet.
+      - **Enter manually** — collect value proposition, 2–3 capabilities,
+        audience, and license in a single `AskUserQuestion` prompt.
+      Populate "What's included" from `bundledSkills` and `mcpServers` in
+      `drwn card source show --json`. Write the completed README to
+      `~/.agents/drwn/sources/<scope>/<name>/README.md` using the template
+      in `references/readme-template.md`.
 4. For source inspection, run `drwn card source show <name> --json`.
 5. For source diagnostics, run `drwn card source doctor [name] --json`.
    Treat `ok: false` as reportable source work, not a command failure.
