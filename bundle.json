@@ -66,6 +66,11 @@
       "path": "skills/support-harness"
     },
     {
+      "name": "sync-card-skills",
+      "scope": "shared",
+      "path": "skills/sync-card-skills"
+    },
+    {
       "name": "import-mcp-from-claude",
       "scope": "shared",
       "path": "skills/import-mcp-from-claude"

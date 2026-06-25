@@ -1,7 +1,7 @@
 {
   "name": "@darwinian/harness-skills",
   "version": "0.2.0",
-  "description": "Stable Darwinian Harness card bundling current-lane project setup, install, materialization, cards, library, defaults, diagnostics, support, repair, recommendation, and MCP-import skills.",
+  "description": "Stable Darwinian Harness card bundling current-lane project setup, install, materialization, cards, library, defaults, diagnostics, support, repair, recommendation, source-sync, and MCP-import skills.",
   "skills": {
     "include": [
       "bootstrap-project",
@@ -16,6 +16,7 @@
       "recommend-harness",
       "share-harness-card",
       "support-harness",
+      "sync-card-skills",
       "import-mcp-from-claude"
     ]
   },
