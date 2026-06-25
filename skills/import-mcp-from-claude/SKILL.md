@@ -32,7 +32,7 @@ When invoked via prose (e.g., "port my Notion and Linear MCPs into drwn"), extra
 
 Show the user a table summarizing the plan before any mutation:
 
-```
+```text
 name        claude transport    in drwn?       action
 ----------- ------------------- -------------- --------------------------
 notion      http                registry       skip add, ask activation
@@ -102,9 +102,11 @@ For each server now activated through drwn, the manual Claude entry will conflic
 
 1. Remind the user: "Once drwn writes this server's config, Claude Code's existing entry for `<name>` will cause drift. Two safe options: (i) remove the Claude-side entry now and let drwn take over cleanly, (ii) keep it for now and use `drwn write --force` when ready."
 2. If the user picks (i):
+
    ```bash
    claude mcp remove <name>
    ```
+
    Run this for each server that was at scope `local`/`project`/`user` per the discovery output. Note: project-scope entries live in `<project>/.mcp.json` and need `cd <project>` before `claude mcp remove`.
 3. Verify cleanup: `claude mcp list` no longer shows the name.
 
