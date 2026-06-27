@@ -1,10 +1,10 @@
-# Example Harness Cards
+# Example Mind Cards
 
-This directory contains minimal reference Harness Cards for documentation
+This directory contains minimal reference Mind Cards for documentation
 purposes. These are not published cards and should not be treated as production
 assets.
 
-To author your own card, invoke `author-harness-card` or run
+To author your own card, invoke `author-mind-card` or run
 `drwn card new <name>` directly.
 
 ## minimal-card
@@ -28,7 +28,7 @@ sed -i.bak "s|@your-handle/|$HANDLE/|g" \
 drwn card source doctor $HANDLE/minimal-card --json
 drwn card publish $HANDLE/minimal-card
 cd ~/sandbox-project
-drwn apply $HANDLE/minimal-card@0.1.0
+drwn card apply $HANDLE/minimal-card@0.1.0
 drwn write --dry-run --json
 drwn write
 ```

@@ -1,7 +1,7 @@
 {
   "name": "@your-handle/minimal-card",
   "version": "0.1.0",
-  "description": "Minimal example Darwinian Harness Card. One skill, no MCP servers.",
+  "description": "Minimal example Darwinian Minds Mind Card. One skill, no MCP servers.",
   "skills": {
     "include": [
       "hello-world"

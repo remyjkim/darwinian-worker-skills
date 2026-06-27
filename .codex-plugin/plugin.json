@@ -1,7 +1,7 @@
 {
   "name": "darwinian",
-  "version": "0.1.0",
-  "description": "Agent-driven layer over the Darwinian Harness drwn CLI for Codex.",
+  "version": "0.3.0",
+  "description": "Agent skills for operating Darwinian Minds through the drwn CLI for Codex.",
   "author": {
     "name": "Remy Kim"
   },
@@ -10,15 +10,15 @@
   "license": "MIT",
   "keywords": [
     "drwn",
-    "darwinian-harness",
-    "harness-cards",
+    "darwinian-minds",
+    "mind-cards",
     "codex"
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "Darwinian Harness Skills",
+    "displayName": "Darwinian Minds Skills",
     "shortDescription": "Agent skills wrapping the drwn CLI.",
-    "longDescription": "Bootstrap projects, install locked cards, materialize downstream state, apply, author, and share reusable Harness Cards, manage local library/defaults, and inspect, support, or repair harness state with approval checkpoints at consequential writes.",
+    "longDescription": "Bootstrap projects, install locked cards, materialize downstream state, apply, author, and share reusable Mind Cards, manage local library/defaults, and inspect, support, or repair harness state with approval checkpoints at consequential writes.",
     "developerName": "Remy Kim",
     "category": "developer-tools",
     "capabilities": [
@@ -29,7 +29,7 @@
     "defaultPrompt": [
       "Bootstrap my harness in this repo",
       "Install the locked cards for this cloned project",
-      "Apply a Darwinian Harness card",
+      "Apply a Darwinian Minds Mind Card",
       "Inspect why this skill is active",
       "Repair my harness state"
     ]

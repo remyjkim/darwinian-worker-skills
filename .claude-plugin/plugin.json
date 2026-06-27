@@ -1,7 +1,7 @@
 {
   "name": "darwinian",
-  "version": "0.1.0",
-  "description": "Agent-driven layer over the Darwinian Harness drwn CLI. Bootstrap projects, install locked cards, materialize downstream state, share Harness Cards, manage library/defaults, and inspect, support, or repair harness state.",
+  "version": "0.3.0",
+  "description": "Agent skills for operating Darwinian Minds through drwn: bootstrap projects, install locked cards, materialize downstream state, manage Mind Cards, manage library/defaults, and inspect, support, or repair harness state.",
   "author": {
     "name": "Remy Kim"
   },
@@ -10,8 +10,8 @@
   "license": "MIT",
   "keywords": [
     "drwn",
-    "darwinian-harness",
-    "harness-cards",
+    "darwinian-minds",
+    "mind-cards",
     "claude-code",
     "codex",
     "cursor",
