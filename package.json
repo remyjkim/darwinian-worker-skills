@@ -22,7 +22,10 @@
     "url": "git+https://github.com/remyjkim/darwinian-minds-skills.git"
   },
   "scripts": {
+    "check:identity": "node scripts/check-identity.mjs",
     "lint:md": "markdownlint-cli2 \"**/*.md\" \"!node_modules/**\"",
+    "smoke:cli": "node scripts/smoke-cli.mjs",
+    "validate:cards": "node scripts/validate-cards.mjs",
     "validate:skills": "node scripts/validate-skills.mjs",
     "sync:cards": "node scripts/sync-card-skills.mjs"
   },

@@ -22,5 +22,11 @@ jobs:
       - name: Lint markdown
         run: npm run lint:md
 
+      - name: Check identity metadata
+        run: npm run check:identity
+
       - name: Validate skills
         run: npm run validate:skills
+
+      - name: Check card-bundled skills
+        run: npm run sync:cards -- --check
