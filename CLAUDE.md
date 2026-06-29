@@ -31,7 +31,7 @@ such as `/darwinian:bootstrap-project`.
 ## Authoritative drwn Surface
 
 The companion CLI is Darwinian Minds. When available locally, use the sibling
-checkout at `~/dev/darwinian-harness`. Otherwise use the
+checkout at `~/dev/darwinian-minds`. Otherwise use the
 published CLI docs as the authority.
 
 ## Common Edits

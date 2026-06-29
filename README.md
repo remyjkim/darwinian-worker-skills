@@ -154,8 +154,8 @@ npm run sync:cards -- --check
 npm run check:identity
 npm run lint:md
 npm run validate:skills
-DRWN_BIN="bun ~/dev/darwinian-harness/cli/index.ts" npm run validate:cards
-DRWN_BIN="bun ~/dev/darwinian-harness/cli/index.ts" npm run smoke:cli
+DRWN_BIN="bun ~/dev/darwinian-minds/cli/index.ts" npm run validate:cards
+DRWN_BIN="bun ~/dev/darwinian-minds/cli/index.ts" npm run smoke:cli
 ```
 
 ## Compatibility
