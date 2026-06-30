@@ -1,6 +1,6 @@
 # MCP `headers` Support — Skill Doc Updates - Implementation Plan
 
-**Status**: Draft, ready for implementation review
+**Status**: Implemented 2026-06-30 (Phases 1–3 done; `import-mcp-from-claude` 4 sites + literal-secret step, `author-mind-card` note; stale-claim sweep clean)
 **Created**: 2026-06-30
 **References**: [darwinian-minds `.ai/tasks/61_drwn-http-mcp-headers-passthrough-implementation-plan.md`, darwinian-minds branch `feat/http-mcp-headers-passthrough` (v0.6.0), skills/import-mcp-from-claude/SKILL.md, skills/author-mind-card/SKILL.md]
 
