@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "bundleName": "darwinian-minds-skills",
+  "bundleName": "darwinian-worker-skills",
   "version": "0.4.0",
-  "displayName": "Darwinian Minds Skills",
-  "description": "Agent skills and mind-card content for operating Darwinian Minds through the drwn CLI.",
+  "displayName": "Darwinian Worker Skills",
+  "description": "Agent skills and mind-card content for operating Darwinian Worker through the drwn CLI.",
   "skills": [
     {
       "name": "bootstrap-project",

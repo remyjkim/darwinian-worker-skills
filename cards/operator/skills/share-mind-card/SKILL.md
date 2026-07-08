@@ -1,6 +1,6 @@
 ---
 name: share-mind-card
-description: "Use when sharing Mind Cards for Darwinian Minds through Git remotes, publishing cards to catalogs, or cloning and fetching Git-backed cards."
+description: "Use when sharing Mind Cards for Darwinian Worker through Git remotes, publishing cards to catalogs, or cloning and fetching Git-backed cards."
 ---
 
 # share-mind-card

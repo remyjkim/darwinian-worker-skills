@@ -1,13 +1,13 @@
 ---
 name: inspect-minds
-description: "Use when inspecting Darwinian Minds state, provenance, or drift without mutating anything, including explaining why a skill, MCP server, extension, or card is active."
+description: "Use when inspecting Darwinian Worker state, provenance, or drift without mutating anything, including explaining why a skill, MCP server, extension, or card is active."
 ---
 
 # inspect-minds
 
 ## Purpose
 
-Explain Darwinian Minds state without mutating anything. Use `status`, `doctor`,
+Explain Darwinian Worker state without mutating anything. Use `status`, `doctor`,
 card-status provenance, store health, and extension status surfaces to answer
 what is active and why. Use write dry-runs only when the user asks what would
 be materialized, including hook-consent warnings or optional card MCP servers.

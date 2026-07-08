@@ -10,7 +10,7 @@ import { rootDir } from "./card-map.mjs";
 
 const drwnBin = process.env.DRWN_BIN || "drwn";
 const keepTemp = process.env.KEEP_SMOKE_TEMP === "1";
-const tmp = mkdtempSync(join(tmpdir(), "darwinian-minds-skills-smoke-"));
+const tmp = mkdtempSync(join(tmpdir(), "darwinian-worker-skills-smoke-"));
 const home = join(tmp, "home");
 const project = join(tmp, "project");
 mkdirSync(home, { recursive: true });

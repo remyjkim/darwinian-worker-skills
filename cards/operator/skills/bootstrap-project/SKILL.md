@@ -1,13 +1,13 @@
 ---
 name: bootstrap-project
-description: "Use when initializing Darwinian Minds in the current project, enabling extensions, or applying starter cards with approval checkpoints before downstream writes."
+description: "Use when initializing Darwinian Worker in the current project, enabling extensions, or applying starter cards with approval checkpoints before downstream writes."
 ---
 
 # bootstrap-project
 
 ## Purpose
 
-Initialize Darwinian Minds for the current repo. Optionally enable
+Initialize Darwinian Worker for the current repo. Optionally enable
 extensions, surface starter cards, and preview downstream changes before any
 write to `.claude/`, `.codex/`, or `.cursor/`.
 

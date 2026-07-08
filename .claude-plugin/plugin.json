@@ -1,12 +1,12 @@
 {
   "name": "darwinian",
   "version": "0.4.0",
-  "description": "Agent skills for operating Darwinian Minds through drwn: bootstrap projects, install locked cards, materialize downstream state, manage Mind Cards, manage library/defaults, and inspect, support, or repair mind state.",
+  "description": "Agent skills for operating Darwinian Worker through drwn: bootstrap projects, install locked cards, materialize downstream state, manage Mind Cards, manage library/defaults, and inspect, support, or repair mind state.",
   "author": {
     "name": "Remy Kim"
   },
-  "homepage": "https://github.com/remyjkim/darwinian-minds-skills",
-  "repository": "https://github.com/remyjkim/darwinian-minds-skills",
+  "homepage": "https://github.com/remyjkim/darwinian-worker-skills",
+  "repository": "https://github.com/remyjkim/darwinian-worker-skills",
   "license": "MIT",
   "keywords": [
     "drwn",

@@ -28,17 +28,17 @@ Releases are SemVer and keyed off the root `VERSION` file.
 - `DRWN_BIN="<repo-local-or-installed-drwn>" npm run validate:cards`
 - `DRWN_BIN="<repo-local-or-installed-drwn>" npm run smoke:cli`
 - `drwn library add skill . --json` and
-  `drwn skills packages show darwinian-minds-skills --json` from a disposable
+  `drwn skills packages show darwinian-worker-skills --json` from a disposable
   `HOME`
 - Smoke-test at least one skill in Claude Code or Codex
 - Reconfirm that referenced `drwn` commands still exist in the current CLI
 
 ### Main Repo Coordination
 
-After the skills repo change is accepted, update the Darwinian Minds CLI repo:
+After the skills repo change is accepted, update the Darwinian Worker CLI repo:
 
 1. Point the submodule URL at
-   `https://github.com/remyjkim/darwinian-minds-skills.git`.
+   `https://github.com/remyjkim/darwinian-worker-skills.git`.
 2. Update the submodule pointer to the accepted skills repo commit.
 3. Update downstream docs and lockfiles that still use singular
    `darwinian-mind*` names according to the task plan.
@@ -63,7 +63,7 @@ After the skills repo change is accepted, update the Darwinian Minds CLI repo:
 3. Update install docs.
 4. Bump `VERSION` minor.
 
-## Coordinating With Darwinian Minds
+## Coordinating With Darwinian Worker
 
 The skills in this repo wrap `drwn`. When the CLI changes:
 

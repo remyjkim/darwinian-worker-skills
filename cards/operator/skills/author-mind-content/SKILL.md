@@ -8,7 +8,7 @@ description: "Use when the user says /author-mind-content, wants to add or remov
 **Assumes**: a card source exists under `~/.agents/drwn/sources/<scope>/<card>/`,
 created via `drwn card new <name>`. The `card source add-*` commands target
 that canonical location. If the user wants to author content in a card
-source that lives in a separate repo (e.g., `darwinian-minds-skills/cards/<card>/`),
+source that lives in a separate repo (e.g., `darwinian-worker-skills/cards/<card>/`),
 explain that the CLI's add-* commands target the canonical source dir; the
 in-repo authoring path is hand-edit for now (a tracked drwn ergonomic gap).
 

@@ -1,13 +1,13 @@
 ---
 name: repair-minds
-description: "Use when repairing Darwinian Minds drift, missing generated files, outdated card locks, or legacy layout, with previews and approvals before mutation."
+description: "Use when repairing Darwinian Worker drift, missing generated files, outdated card locks, or legacy layout, with previews and approvals before mutation."
 ---
 
 # repair-minds
 
 ## Purpose
 
-Guide safe repair of Darwinian Minds state after `inspect-minds` or a user report
+Guide safe repair of Darwinian Worker state after `inspect-minds` or a user report
 finds drift. Use diagnostics to classify the issue, preview the fix, and only
 then mutate. Treat hook consent and optional card MCP activation as explicit
 user decisions, not automatic repairs.

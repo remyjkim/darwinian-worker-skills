@@ -1,13 +1,13 @@
 ---
 name: manage-library
-description: "Use when managing Darwinian Minds local inventory, package-backed or loose local skills, MCP definitions, or card catalogs without making them defaults."
+description: "Use when managing Darwinian Worker local inventory, package-backed or loose local skills, MCP definitions, or card catalogs without making them defaults."
 ---
 
 # manage-library
 
 ## Purpose
 
-Manage reusable inventory that is available to Darwinian Minds but not
+Manage reusable inventory that is available to Darwinian Worker but not
 automatically active everywhere. Use this for package-backed skill bundles,
 loose local `SKILL.md` files or skill directories, local MCP definitions, card
 catalogs, and library inspection. Use

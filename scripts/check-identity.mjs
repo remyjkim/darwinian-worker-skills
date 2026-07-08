@@ -27,7 +27,7 @@ const claudePlugin = readJson(".claude-plugin/plugin.json");
 const claudeMarketplace = readJson(".claude-plugin/marketplace.json");
 const codexPlugin = readJson(".codex-plugin/plugin.json");
 
-assert(pkg.name === "darwinian-minds-skills", "package.json name must be darwinian-minds-skills", errors);
+assert(pkg.name === "darwinian-worker-skills", "package.json name must be darwinian-worker-skills", errors);
 assert(pkg.version === version, "package.json version must match VERSION", errors);
 assert(lock.name === pkg.name, "package-lock.json root name must match package.json", errors);
 assert(lock.version === pkg.version, "package-lock.json root version must match package.json", errors);
@@ -35,22 +35,22 @@ assert(lock.packages?.[""]?.name === pkg.name, "package-lock packages[''] name m
 assert(lock.packages?.[""]?.version === pkg.version, "package-lock packages[''] version must match package.json", errors);
 assert(bundle.bundleName === pkg.name, "bundle.json bundleName must match package.json name", errors);
 assert(bundle.version === pkg.version, "bundle.json version must match package.json", errors);
-assert(bundle.displayName === "Darwinian Minds Skills", "bundle.json displayName must be Darwinian Minds Skills", errors);
+assert(bundle.displayName === "Darwinian Worker Skills", "bundle.json displayName must be Darwinian Worker Skills", errors);
 
 for (const [label, manifest] of [
   [".claude-plugin/plugin.json", claudePlugin],
   [".codex-plugin/plugin.json", codexPlugin],
 ]) {
   assert(manifest.version === pkg.version, `${label} version must match package.json`, errors);
-  assert(manifest.homepage?.includes("darwinian-minds-skills"), `${label} homepage must use darwinian-minds-skills`, errors);
-  assert(manifest.repository?.includes("darwinian-minds-skills"), `${label} repository must use darwinian-minds-skills`, errors);
-  assert(manifest.description?.includes("Darwinian Minds"), `${label} description must use Darwinian Minds`, errors);
+  assert(manifest.homepage?.includes("darwinian-worker-skills"), `${label} homepage must use darwinian-worker-skills`, errors);
+  assert(manifest.repository?.includes("darwinian-worker-skills"), `${label} repository must use darwinian-worker-skills`, errors);
+  assert(manifest.description?.includes("Darwinian Worker"), `${label} description must use Darwinian Worker`, errors);
 }
 
 assert(claudeMarketplace.metadata?.version === pkg.version, ".claude-plugin/marketplace.json metadata version must match package.json", errors);
 for (const plugin of claudeMarketplace.plugins ?? []) {
   assert(plugin.version === pkg.version, ".claude-plugin/marketplace.json plugin version must match package.json", errors);
-  assert(plugin.description?.includes("Darwinian Minds"), ".claude-plugin/marketplace.json plugin description must use Darwinian Minds", errors);
+  assert(plugin.description?.includes("Darwinian Worker"), ".claude-plugin/marketplace.json plugin description must use Darwinian Worker", errors);
 }
 
 const publicFiles = [

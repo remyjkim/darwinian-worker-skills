@@ -1,6 +1,6 @@
-# Darwinian Minds Skills
+# Darwinian Worker Skills
 
-Agent skills and Mind Card content for operating Darwinian Minds through the
+Agent skills and Mind Card content for operating Darwinian Worker through the
 `drwn` CLI in Claude Code, Codex, Cursor, and other agentic environments.
 
 The package currently ships 18 top-level skills:
@@ -26,10 +26,10 @@ flow.
 | `author-mind-content` | Add/remove persona, beliefs, and memory in card sources | card source | primary |
 | `audit-mind-visibility` | Read-only visibility audit before push or publish | project + card source | primary |
 | `sync-card-skills` | Refresh a card source's bundled skills from canonical sources | card source | primary |
-| `import-mcp-from-claude` | Port Claude Code MCP entries into the Darwinian Minds library | project + machine | primary |
+| `import-mcp-from-claude` | Port Claude Code MCP entries into the Darwinian Worker library | project + machine | primary |
 | `install-project` | Bootstrap a cloned project from locked cards | project + store | primary |
 | `inspect-minds` | Read-only inspection of state, minds, provenance, and drift | project | primary |
-| `materialize-minds` | Write effective Darwinian Minds state into downstream agent tools | project or machine | primary |
+| `materialize-minds` | Write effective Darwinian Worker state into downstream agent tools | project or machine | primary |
 | `manage-library` | Manage reusable inventory, package bundles, MCPs, and catalogs | machine | primary |
 | `repair-minds` | Guide safe repair of drift, locks, generated files, and legacy layout | project + machine | primary |
 | `manage-defaults` | Machine-wide defaults and curated publication layer | machine | primary |
@@ -45,7 +45,7 @@ user-ask checkpoints before consequential writes.
 This repo ships real card sources under [cards](./cards):
 
 - `@darwinian/operator`: primary card with the skills an agent needs to
-  operate Darwinian Minds through `drwn`.
+  operate Darwinian Worker through `drwn`.
 - `@darwinian/base-mind`: BaseMind card with persona, beliefs, and three mind
   operator skills.
 - `@darwinian/workspace-experimental`: explicit experimental card for the
@@ -55,7 +55,7 @@ During local development, apply the primary card directly with a
 `file:` ref:
 
 ```bash
-drwn card apply file:/path/to/darwinian-minds-skills/cards/operator
+drwn card apply file:/path/to/darwinian-worker-skills/cards/operator
 drwn write --dry-run --json
 ```
 
@@ -73,11 +73,11 @@ npm run sync:cards
 
 ## Install
 
-### Darwinian Minds Local Library
+### Darwinian Worker Local Library
 
 ```bash
-drwn library add skill /path/to/darwinian-minds-skills
-drwn skills packages show darwinian-minds-skills
+drwn library add skill /path/to/darwinian-worker-skills
+drwn skills packages show darwinian-worker-skills
 drwn add skill inspect-minds --dry-run --json
 ```
 
@@ -87,8 +87,8 @@ Use `drwn add skill <name>` for one project, or
 ### Claude Code
 
 ```bash
-/plugin marketplace add remyjkim/darwinian-minds-skills
-/plugin install darwinian@darwinian-minds-skills
+/plugin marketplace add remyjkim/darwinian-worker-skills
+/plugin install darwinian@darwinian-worker-skills
 ```
 
 Then invoke any skill with `/darwinian:<skill-name>`, for example
@@ -97,7 +97,7 @@ Then invoke any skill with `/darwinian:<skill-name>`, for example
 ### Codex CLI
 
 ```bash
-codex plugin marketplace add remyjkim/darwinian-minds-skills
+codex plugin marketplace add remyjkim/darwinian-worker-skills
 codex plugin install darwinian
 ```
 
@@ -106,13 +106,13 @@ codex plugin install darwinian
 Inside a Codex session:
 
 ```text
-$skill-installer https://github.com/remyjkim/darwinian-minds-skills/tree/main/skills/<skill-name>
+$skill-installer https://github.com/remyjkim/darwinian-worker-skills/tree/main/skills/<skill-name>
 ```
 
 ### Vercel `npx skills add`
 
 ```bash
-npx skills add remyjkim/darwinian-minds-skills
+npx skills add remyjkim/darwinian-worker-skills
 ```
 
 Use `--agent <agent>` to target a specific runtime and `-g` for a global

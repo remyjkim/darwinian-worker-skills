@@ -1,13 +1,13 @@
 ---
 name: materialize-minds
-description: "Use when activating project-local skills or MCP servers, or writing effective Darwinian Minds state into downstream agent tools."
+description: "Use when activating project-local skills or MCP servers, or writing effective Darwinian Worker state into downstream agent tools."
 ---
 
 # materialize-minds
 
 ## Purpose
 
-Materialize effective Darwinian Minds state into downstream agent tools. Use
+Materialize effective Darwinian Worker state into downstream agent tools. Use
 this for routine `drwn write` work, targeted writes, MCP-only writes,
 skills-only writes, and project-local activation of individual skills or MCP
 servers before writing. Use `--root` or `--user` when the requested write is
