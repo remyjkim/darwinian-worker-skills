@@ -7,14 +7,14 @@ skills.
 
 | Card | Purpose | Contents |
 | --- | --- | --- |
-| `@darwinian/operator` | Primary card for operating Darwinian Minds through `drwn` | Stable workflow skills, mind-stack skills, MCP import, and card source sync |
+| `@darwinian/operator` | Primary card for operating Darwinian Worker through `drwn` | Stable workflow skills, mind-stack skills, MCP import, and card source sync |
 | `@darwinian/base-mind` | BaseMind card for operating mind composition itself | Persona, public beliefs, and `manage-active-mind-stack`, `author-mind-content`, `audit-mind-visibility` |
 | `@darwinian/workspace-experimental` | Explicitly experimental card for the future workspace organizer stub | `organize-workspace` |
 
 ## Why Multiple Cards
 
 `@darwinian/operator` is the primary card most users should apply when they
-want the Darwinian Minds operator skills.
+want the Darwinian Worker operator skills.
 
 `@darwinian/base-mind` carries richer mind content and stays intentionally
 small: it includes only the persona, beliefs, and skills needed to activate,
@@ -47,7 +47,7 @@ npm run sync:cards -- --check
 Use `file:` refs during local development:
 
 ```bash
-drwn card apply file:/path/to/darwinian-minds-skills/cards/operator
+drwn card apply file:/path/to/darwinian-worker-skills/cards/operator
 drwn write --dry-run --json
 ```
 

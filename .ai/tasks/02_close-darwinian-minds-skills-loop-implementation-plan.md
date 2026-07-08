@@ -1,15 +1,15 @@
-ABOUTME: Implementation plan to finish the Darwinian Minds skills repo work started by PR #7.
+ABOUTME: Implementation plan to finish the Darwinian Worker skills repo work started by PR #7.
 ABOUTME: Covers docs/plugins/lockfile cleanup, mind-skill safety fixes, card composition, validation, smoke tests, and main-repo submodule coordination.
 
-# Close The Darwinian Minds Skills Loop - Implementation Plan
+# Close The Darwinian Worker Skills Loop - Implementation Plan
 
 **Status**: Draft, ready for implementation review  
 **Created**: 2026-06-27  
 **Target repo**: `~/dev/darwinian-harness-skills`  
 **Reference CLI repo**: `~/dev/darwinian-harness`  
 **Current skills repo base**: `main` at `d77e2a0` (`Merge pull request #7 from remyjkim/feat/base-mind-card`)  
-**Current package identity**: `darwinian-minds-skills@0.3.0`  
-**Canonical product name**: `Darwinian Minds` for the CLI/tooling ecosystem; `drwn` remains the command name.  
+**Current package identity**: `darwinian-worker-skills@0.3.0`  
+**Canonical product name**: `Darwinian Worker` for the CLI/tooling ecosystem; `drwn` remains the command name.  
 **Primary objective**: Finish the package, docs, plugin, card, skill, validation, and submodule follow-through after the new BaseMind work, without regressing the useful 18-skill inventory now on `origin/main`.
 
 ---
@@ -17,14 +17,14 @@ ABOUTME: Covers docs/plugins/lockfile cleanup, mind-skill safety fixes, card com
 ## Executive Summary
 
 PR #7 moved the repo meaningfully forward: it renamed package-level metadata to
-`darwinian-minds-skills`, added `@darwinian/base-mind@0.1.0`, introduced three
+`darwinian-worker-skills`, added `@darwinian/base-mind@0.1.0`, introduced three
 mind-specific skills, and expanded validation to understand the new base-mind
 card lane.
 
 The work is structurally valid but not release-polished. The repo currently has
 a mixed identity:
 
-- `package.json`, `bundle.json`, and remote URL say `darwinian-minds-skills`.
+- `package.json`, `bundle.json`, and remote URL say `darwinian-worker-skills`.
 - `package-lock.json`, README, cards README, plugin display copy, examples, and
   many skill descriptions still say Darwinian Harness / Harness Cards.
 - The old `@darwinian/harness-skills` card remains the only broad tools card.
@@ -34,7 +34,7 @@ a mixed identity:
 The closing strategy is:
 
 1. Preserve the useful 18-skill inventory and `@darwinian/base-mind`.
-2. Make `Darwinian Minds` the canonical user-facing product name across the
+2. Make `Darwinian Worker` the canonical user-facing product name across the
    skills repo and explicitly plan the downstream CLI/docs repo migration.
 3. Complete the public rebrand across docs, plugins, lockfiles, and examples.
 4. Introduce a primary `@darwinian/mind-skills` tools card while keeping
@@ -67,7 +67,7 @@ d77e2a0 Merge pull request #7 from remyjkim/feat/base-mind-card
 c8f1efd fix(skills): satisfy markdownlint in base-mind skill bodies
 3bb61c8 feat(cards): add @darwinian/base-mind v0.1.0
 6bcad1a chore(scripts): extend skill inventory validator to recognize base-mind lane
-533e539 chore(rename): align package + plugin metadata with darwinian-minds-skills
+533e539 chore(rename): align package + plugin metadata with darwinian-worker-skills
 e454228 Merge pull request #6 from remyjkim/feat/sync-card-skills-skill
 ```
 
@@ -89,7 +89,7 @@ Results:
 ```text
 lint:md pass, 52 files
 validate:skills pass, 18 skills
-npm pack pass, darwinian-minds-skills@0.3.0, 62 entries
+npm pack pass, darwinian-worker-skills@0.3.0, 62 entries
 ```
 
 Current CLI card validations from `~/dev/darwinian-harness`:
@@ -130,7 +130,7 @@ Observed behavior:
 | Cards README | Still only describes two Harness cards; no `base-mind` or future `mind-skills` lane. |
 | Plugin manifests | URLs changed, but display copy, keywords, tags, prompts, and versions still say Harness / `0.1.0`. |
 | Maintainer docs | Release checklist still references old package name and lacks card validation / smoke checks. |
-| Downstream product name | The main CLI repo still uses singular `Darwinian Mind` / `darwinian-mind` across package metadata, docs sites, docs lockfiles, release checks, tests, and submodule docs. Official user-facing naming should be `Darwinian Minds`. |
+| Downstream product name | The main CLI repo still uses singular `Darwinian Mind` / `darwinian-mind` across package metadata, docs sites, docs lockfiles, release checks, tests, and submodule docs. Official user-facing naming should be `Darwinian Worker`. |
 | Stable card | `@darwinian/harness-skills` remains primary broad tools card; no `@darwinian/mind-skills`. |
 | Skill IDs | Card-specific skills are still `apply-harness-card`, `author-harness-card`, `share-harness-card`. |
 | Mind stack skill | `manage-active-mind-stack` instructs `drwn mind use` / `clear` before approval for the config mutation. |
@@ -203,14 +203,14 @@ Do not blindly replace every instance of "harness".
 
 Use:
 
-- `Darwinian Minds` for the CLI/tooling ecosystem's official user-facing
+- `Darwinian Worker` for the CLI/tooling ecosystem's official user-facing
   product name.
-- `Darwinian Minds Skills` for the skills package/plugin display identity.
+- `Darwinian Worker Skills` for the skills package/plugin display identity.
 - `Mind Card` for the card unit.
 - `darwinian-minds-*` slugs for renamed downstream repos, packages, docs
   packages, plugins, and lockfile identities where the published artifact is
   being migrated.
-- `darwinian-minds-skills` for this skills package/repo/install identity.
+- `darwinian-worker-skills` for this skills package/repo/install identity.
 - `harness` only when referring to the generic local control-plane layer,
   generated harness state, or the historical/current CLI repo path.
 
@@ -227,8 +227,8 @@ surface itself changes:
 Examples:
 
 - Change "Harness Card" to "Mind Card".
-- Change "Darwinian Mind" product copy to "Darwinian Minds".
-- Change public install commands to `darwinian-minds-skills`.
+- Change "Darwinian Mind" product copy to "Darwinian Worker".
+- Change public install commands to `darwinian-worker-skills`.
 - Preserve `materialize-harness` and `repair-harness` names for now because
   they are control-plane operations, not card-unit names.
 - Preserve `~/dev/darwinian-harness` as a local reference to the
@@ -302,12 +302,12 @@ CLAUDE.md
    Expected root identity:
 
    ```text
-   darwinian-minds-skills@0.3.0
+   darwinian-worker-skills@0.3.0
    ```
 
 2. Update README:
-   - Title: `Darwinian Minds Skills`.
-   - Package/repo commands: `remyjkim/darwinian-minds-skills`.
+   - Title: `Darwinian Worker Skills`.
+   - Package/repo commands: `remyjkim/darwinian-worker-skills`.
    - Local library command: `drwn library add skill <path-to-this-repo>`.
    - Skill inventory: 18 top-level skills, with stable/compatibility lanes
      clearly labeled.
@@ -325,7 +325,7 @@ CLAUDE.md
 4. Update plugin manifests:
    - Version fields to `0.3.0` unless plugin-versioning policy intentionally
      differs from package version.
-   - Display name: `Darwinian Minds Skills`.
+   - Display name: `Darwinian Worker Skills`.
    - Keywords/tags: `darwinian-minds`, `mind-cards`, `drwn`.
    - Descriptions: mention Mind Cards and BaseMind.
    - Keep plugin namespace `darwinian`; do not change invocation prefix.
@@ -346,7 +346,7 @@ CLAUDE.md
 ```bash
 npm run lint:md
 npm run validate:skills
-node -e 'const p=require("./package-lock.json"); if (p.name !== "darwinian-minds-skills") process.exit(1)'
+node -e 'const p=require("./package-lock.json"); if (p.name !== "darwinian-worker-skills") process.exit(1)'
 npm pack --dry-run --json
 ```
 
@@ -724,15 +724,15 @@ package/docs/readiness checks if they assert submodule URL or content
 1. Update `.gitmodules` URL:
 
    ```text
-   https://github.com/remyjkim/darwinian-minds-skills.git
+   https://github.com/remyjkim/darwinian-worker-skills.git
    ```
 
 2. Update the submodule pointer to the accepted skills repo commit.
 3. Decide whether to rename the submodule path from `darwinian-harness-skills`
-   to `darwinian-minds-skills`.
+   to `darwinian-worker-skills`.
    - Recommended for this phase: update URL and pointer only; path rename can
      be separate because it is more disruptive.
-4. Apply the official user-facing product name `Darwinian Minds` across README,
+4. Apply the official user-facing product name `Darwinian Worker` across README,
    docs, docs sites, alt text, titles, descriptions, maintainer docs, tests,
    and generated docs copy.
 5. Migrate downstream slugs deliberately:
@@ -740,11 +740,11 @@ package/docs/readiness checks if they assert submodule URL or content
      `darwinian-minds` where the public artifact is being renamed.
    - Docs packages from `darwinian-mind-docs` to `darwinian-minds-docs`.
    - Skills submodule docs from `darwinian-mind-skills` to
-     `darwinian-minds-skills`.
+     `darwinian-worker-skills`.
    - Lockfiles (`bun.lock`, `docs-astro/bun.lock`, `docs-docusaurus/bun.lock`)
      after package metadata changes.
 6. Update release-readiness scripts and tests so they enforce the new
-   Darwinian Minds identity instead of the singular legacy identity.
+   Darwinian Worker identity instead of the singular legacy identity.
 7. Review subpath import examples and tests such as
    `darwinian-mind/hook-policy`.
    - If the npm package slug changes to `darwinian-minds`, update examples and
@@ -798,7 +798,7 @@ git status --short --branch --untracked-files=all
 
 - Package identity is consistent across `package.json`, `package-lock.json`,
   `VERSION`, `bundle.json`, plugin manifests, README, and maintainer docs.
-- Public docs use Darwinian Minds / Mind Card terminology, with only intentional
+- Public docs use Darwinian Worker / Mind Card terminology, with only intentional
   legacy or generic control-plane `harness` references remaining.
 - Plugin metadata is current and no longer advertises Harness Cards as the
   primary product unit.
@@ -815,7 +815,7 @@ git status --short --branch --untracked-files=all
   smoke tests exist and pass.
 - Main repo submodule URL/pointer update plan is complete after skills repo
   acceptance.
-- Downstream CLI/docs repos have a concrete Darwinian Minds naming migration
+- Downstream CLI/docs repos have a concrete Darwinian Worker naming migration
   path, including package metadata, docs packages, docs lockfiles,
   release-readiness checks, tests, and compatibility/deprecation notes for any
   intentionally retained singular slugs.

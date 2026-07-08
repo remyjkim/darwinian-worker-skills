@@ -1,6 +1,6 @@
 ---
 name: author-mind-card
-description: "Use when creating, editing, publishing, diffing, inspecting, or deprecating reusable Mind Cards for Darwinian Minds from a local card source."
+description: "Use when creating, editing, publishing, diffing, inspecting, or deprecating reusable Mind Cards for Darwinian Worker from a local card source."
 ---
 
 # author-mind-card

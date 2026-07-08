@@ -1,13 +1,13 @@
 ---
 name: install-project
-description: "Use when bootstrapping a cloned Darwinian Minds project from an existing card.lock without changing card intent."
+description: "Use when bootstrapping a cloned Darwinian Worker project from an existing card.lock without changing card intent."
 ---
 
 # install-project
 
 ## Purpose
 
-Bootstrap a cloned project that already carries Darwinian Minds card state.
+Bootstrap a cloned project that already carries Darwinian Worker card state.
 Use the project lockfile to fetch or verify locked cards, preview downstream
 materialization, and then apply the locked mind state.
 

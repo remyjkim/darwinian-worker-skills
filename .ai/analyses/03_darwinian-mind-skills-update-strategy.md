@@ -6,9 +6,9 @@ reference_cli_repo: ~/dev/darwinian-harness
 scope: skills-repo-design-and-update-strategy
 ---
 
-# Darwinian Minds Skills Update Strategy
+# Darwinian Worker Skills Update Strategy
 
-ABOUTME: Investigates the current skills repo design, usage scenarios, and alignment gaps against the current Darwinian Minds CLI.
+ABOUTME: Investigates the current skills repo design, usage scenarios, and alignment gaps against the current Darwinian Worker CLI.
 ABOUTME: Recommends a strategy for updating skill names, skill scopes, card composition, validation, and mind-card workflow coverage.
 
 ## Executive Summary
@@ -17,12 +17,12 @@ The skills repo is structurally sound. Its strongest design decision is that ski
 
 That structure should be preserved.
 
-The current standalone repo, however, is not yet the right Darwinian Minds skills package. It has two important divergences:
+The current standalone repo, however, is not yet the right Darwinian Worker skills package. It has two important divergences:
 
 1. The standalone repo at `~/dev/darwinian-harness-skills` is on `feat/sync-card-skills-skill` with 15 valid skills and the freshest functional coverage, but it still uses `darwinian-harness-skills`, Harness Card terminology, and old card-skill names.
 2. The checked-out submodule inside `~/dev/darwinian-harness/darwinian-harness-skills` has a rebrand commit to the singular `darwinian-mind-skills` name and `apply/author/share-mind-card`, but that submodule commit is older and lacks later standalone repo work such as `import-mcp-from-claude`, `sync-card-skills`, stronger catalog publication coverage, and the current 15-skill validation model.
 
-The best base is the standalone 15-skill branch, with the Darwinian Minds rebrand ported forward onto it. Starting from the submodule rebrand snapshot would regress useful coverage.
+The best base is the standalone 15-skill branch, with the Darwinian Worker rebrand ported forward onto it. Starting from the submodule rebrand snapshot would regress useful coverage.
 
 The substantive product gap is now mind-card behavior. The skills repo should add one new project-level skill for active mind stack management, patch the card authoring/sharing/materialization/inspection/repair skills for mind-aware behavior, and keep the core portfolio small enough that an agent can select the right skill without confusion.
 
@@ -77,7 +77,7 @@ All skills valid (15 found)
 
 This is the freshest functional skills branch.
 
-### Darwinian Minds Submodule Snapshot
+### Darwinian Worker Submodule Snapshot
 
 Path:
 
@@ -223,7 +223,7 @@ These conventions are more valuable than the current names. The update should pr
 | Materialization docs are not mind-aware | `drwn write` now writes per-mind and composed mind artifacts, not just downstream skills/MCP files. |
 | Inspection/repair are not mind-aware | Diagnosing "why is this active?" now includes active stack state, generated `mind/`, generated `minds/`, and default-all semantics. |
 | Support misses `store seed` and `store migrate-to-git` | Current store commands are not fully represented. |
-| Standalone repo is not rebranded | Users searching for Darwinian Minds and Mind Cards will see stale Harness naming. |
+| Standalone repo is not rebranded | Users searching for Darwinian Worker and Mind Cards will see stale Harness naming. |
 | Stable card is still `@darwinian/harness-skills` | The package card advertises the old unit, even if some harness terms remain valid internally. |
 | Sync script lacks `--check` | CI cannot fail on stale card-bundled copies without mutating the tree. |
 
@@ -234,7 +234,7 @@ These conventions are more valuable than the current names. The update should pr
 User asks:
 
 ```text
-Set up Darwinian Minds in this repo.
+Set up Darwinian Worker in this repo.
 Recommend a starter card.
 Apply this card and write the generated files.
 ```
@@ -249,7 +249,7 @@ Expected behavior after update:
 
 - Still verifies `drwn`, `status`, and store health.
 - Still owns `init`, starter discovery, extension setup, card apply, and first write.
-- Should speak in Darwinian Minds / Mind Card terms.
+- Should speak in Darwinian Worker / Mind Card terms.
 - After applying cards and before/after write, should tell the user that absent `activeMinds` means all installed cards are active.
 - Should optionally run `drwn mind list --json` after write when cards are applied, so the user sees installed and active minds.
 - Should redirect to `manage-active-mind-stack` when the user asks to choose or switch an active stack.
@@ -655,7 +655,7 @@ all stable skills except organize-workspace
 This card remains a tools-only Mind Card. That is acceptable, but the docs should say so explicitly:
 
 ```text
-This card installs Darwinian Minds operator skills. It does not itself carry persona, belief, or memory content.
+This card installs Darwinian Worker operator skills. It does not itself carry persona, belief, or memory content.
 ```
 
 ### Compatibility Skills Card
@@ -675,7 +675,7 @@ Create a separate rich mind card, for example:
 Purpose:
 
 - Demonstrate the canonical Mind Card model.
-- Carry persona, beliefs, and memory guidance for operating the Darwinian Minds CLI.
+- Carry persona, beliefs, and memory guidance for operating the Darwinian Worker CLI.
 - Include or depend on the operator skills as appropriate.
 
 This preserves a clean separation:
@@ -925,7 +925,7 @@ Then, in an isolated `HOME`, run:
 
 ```bash
 drwn library add skill ~/dev/darwinian-harness-skills --json
-drwn skills packages show darwinian-minds-skills --json
+drwn skills packages show darwinian-worker-skills --json
 ```
 
 ## Open Decisions
@@ -1000,11 +1000,11 @@ Recommendation:
 
 Draft and execute an implementation plan with this sequence:
 
-1. Reconcile the standalone 15-skill branch with the Darwinian Minds rebrand.
+1. Reconcile the standalone 15-skill branch with the Darwinian Worker rebrand.
 2. Add `manage-active-mind-stack`.
 3. Patch `author-mind-card`, `share-mind-card`, `apply-mind-card`, `materialize-harness`, `inspect-harness`, `repair-harness`, and `support-harness`.
 4. Rename or supplement the stable card as `@darwinian/mind-skills`.
 5. Add `sync:cards -- --check`, card validation scripts, and isolated CLI smoke tests.
 6. Validate with lint, skills validation, card validation through current `drwn`, package dry-run, and the isolated mind-card Bash smoke.
 
-This approach updates the repo with minimal conceptual churn while covering the core current Darwinian Minds CLI workflows.
+This approach updates the repo with minimal conceptual churn while covering the core current Darwinian Worker CLI workflows.

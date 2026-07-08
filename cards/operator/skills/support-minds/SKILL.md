@@ -1,6 +1,6 @@
 ---
 name: support-minds
-description: "Use when collecting Darwinian Minds support artifacts, exporting or analyzing session logs, managing analyzer auth, or running low-risk store maintenance checks."
+description: "Use when collecting Darwinian Worker support artifacts, exporting or analyzing session logs, managing analyzer auth, or running low-risk store maintenance checks."
 ---
 
 # support-minds

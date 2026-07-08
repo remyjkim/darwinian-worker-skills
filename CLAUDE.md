@@ -1,4 +1,4 @@
-# Working In darwinian-minds-skills
+# Working In darwinian-worker-skills
 
 This repo distributes agent skills. Most content is Markdown, plus a small
 validation script and distribution manifests.
@@ -30,7 +30,7 @@ such as `/darwinian:bootstrap-project`.
 
 ## Authoritative drwn Surface
 
-The companion CLI is Darwinian Minds. When available locally, use the sibling
+The companion CLI is Darwinian Worker. When available locally, use the sibling
 checkout at `~/dev/darwinian-minds`. Otherwise use the
 published CLI docs as the authority.
 
@@ -42,5 +42,5 @@ published CLI docs as the authority.
   so the bundled card copies under `cards/` stay aligned.
 - Add a skill by creating `skills/<new-name>/SKILL.md`, updating the README
   table, and then validating again.
-- Coordinate breaking CLI-surface changes with the Darwinian Minds CLI first;
+- Coordinate breaking CLI-surface changes with the Darwinian Worker CLI first;
   do not silently workaround them here.

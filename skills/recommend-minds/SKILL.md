@@ -1,6 +1,6 @@
 ---
 name: recommend-minds
-description: "Use when suggesting Mind Cards for Darwinian Minds, extensions, skills, or MCP servers for the current project without mutating state."
+description: "Use when suggesting Mind Cards for Darwinian Worker, extensions, skills, or MCP servers for the current project without mutating state."
 ---
 
 # recommend-minds
