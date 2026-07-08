@@ -11,7 +11,7 @@ description: "Use when the user asks for cross-project Darwinian Minds organizat
 ## Why This Exists
 
 The broader Darwinian Minds product vision includes a cross-project organizer
-that can scan a workspace, categorize repos, and help layer harness defaults
+that can scan a workspace, categorize repos, and help layer mind defaults
 across multiple projects.
 
 That is not part of the live cards-era CLI today because:
@@ -26,7 +26,7 @@ If a user wants to organize or onboard repos today:
 
 1. Explain that workspace-level organization is not implemented in this skill.
 2. Redirect them to `bootstrap-project` for per-project setup.
-3. If they need recommendations first, redirect them to `recommend-harness`.
+3. If they need recommendations first, redirect them to `recommend-minds`.
 
 ## Scope
 
@@ -35,4 +35,4 @@ Workspace idea only. No mutations.
 ## Related Skills
 
 - `bootstrap-project`
-- `recommend-harness`
+- `recommend-minds`

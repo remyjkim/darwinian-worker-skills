@@ -24,9 +24,9 @@ such as `/darwinian:bootstrap-project`.
 
 - Do not add MCP servers, hooks, or slash commands at the plugin level. This
   repo is intentionally skills-first.
-- Do not synthesize draft card manifests inside `recommend-harness`.
-- Do not invoke mutating `drwn` commands from `inspect-harness` or
-  `recommend-harness`.
+- Do not synthesize draft card manifests inside `recommend-minds`.
+- Do not invoke mutating `drwn` commands from `inspect-minds` or
+  `recommend-minds`.
 
 ## Authoritative drwn Surface
 

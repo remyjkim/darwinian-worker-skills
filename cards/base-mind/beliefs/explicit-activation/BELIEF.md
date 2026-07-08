@@ -7,7 +7,7 @@ materialized as isolated bundles under `.agents/drwn/generated/minds/`,
 but the IDE projection (`.claude`/`.codex`/`.cursor`) only reflects the
 active stack.
 
-The single retired behavior from the harness-cards era is unconditional
+The single retired behavior from earlier card generations is unconditional
 cross-card merging into the project surface. Don't try to bring it back
 through scripts or workarounds; the model is intentional.
 

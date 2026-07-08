@@ -3,12 +3,11 @@
 Agent skills and Mind Card content for operating Darwinian Minds through the
 `drwn` CLI in Claude Code, Codex, Cursor, and other agentic environments.
 
-The package currently ships 21 top-level skills:
+The package currently ships 18 top-level skills:
 
 - 17 primary workflow skills for project setup, install, downstream
   materialization, Mind Cards, library/defaults, diagnostics, support, repair,
   source sync, MCP import, recommendations, and mind-stack operations.
-- 3 compatibility aliases for the previous harness-card skill names.
 - 1 future-lane workspace organizer stub.
 
 Distributed via Claude Code plugin marketplace, Codex plugin / skill install
@@ -28,17 +27,14 @@ flow.
 | `audit-mind-visibility` | Read-only visibility audit before push or publish | project + card source | primary |
 | `sync-card-skills` | Refresh a card source's bundled skills from canonical sources | card source | primary |
 | `import-mcp-from-claude` | Port Claude Code MCP entries into the Darwinian Minds library | project + machine | primary |
-| `install-harness-project` | Bootstrap a cloned project from locked cards | project + store | primary |
-| `inspect-harness` | Read-only inspection of state, minds, provenance, and drift | project | primary |
-| `materialize-harness` | Write effective Darwinian Minds state into downstream agent tools | project or machine | primary |
-| `manage-harness-library` | Manage reusable inventory, package bundles, MCPs, and catalogs | machine | primary |
-| `repair-harness` | Guide safe repair of drift, locks, generated files, and legacy layout | project + machine | primary |
+| `install-project` | Bootstrap a cloned project from locked cards | project + store | primary |
+| `inspect-minds` | Read-only inspection of state, minds, provenance, and drift | project | primary |
+| `materialize-minds` | Write effective Darwinian Minds state into downstream agent tools | project or machine | primary |
+| `manage-library` | Manage reusable inventory, package bundles, MCPs, and catalogs | machine | primary |
+| `repair-minds` | Guide safe repair of drift, locks, generated files, and legacy layout | project + machine | primary |
 | `manage-defaults` | Machine-wide defaults and curated publication layer | machine | primary |
-| `recommend-harness` | Suggest Mind Cards, extensions, skills, MCPs without mutation | project | primary |
-| `support-harness` | Export support artifacts and run explicit store maintenance | project + machine | primary |
-| `apply-harness-card` | Compatibility alias for `apply-mind-card` | project | compatibility |
-| `author-harness-card` | Compatibility alias for `author-mind-card` | card source | compatibility |
-| `share-harness-card` | Compatibility alias for `share-mind-card` | store + remote + catalog | compatibility |
+| `recommend-minds` | Suggest Mind Cards, extensions, skills, MCPs without mutation | project | primary |
+| `support-minds` | Export support artifacts and run explicit store maintenance | project + machine | primary |
 | `organize-workspace` | Future cross-project organizer stub | workspace | experimental |
 
 Each mutating skill is a thin wrapper over `drwn` commands with explicit
@@ -48,19 +44,18 @@ user-ask checkpoints before consequential writes.
 
 This repo ships real card sources under [cards](./cards):
 
-- `@darwinian/mind-skills`: primary tools-only card for the current workflow
-  skills.
+- `@darwinian/operator`: primary card with the skills an agent needs to
+  operate Darwinian Minds through `drwn`.
 - `@darwinian/base-mind`: BaseMind card with persona, beliefs, and three mind
   operator skills.
-- `@darwinian/harness-skills`: compatibility tools card for one release.
 - `@darwinian/workspace-experimental`: explicit experimental card for the
   `organize-workspace` stub.
 
-During local development, apply the primary tools card directly with a
+During local development, apply the primary card directly with a
 `file:` ref:
 
 ```bash
-drwn card apply file:/path/to/darwinian-minds-skills/cards/mind-skills
+drwn card apply file:/path/to/darwinian-minds-skills/cards/operator
 drwn write --dry-run --json
 ```
 
@@ -83,7 +78,7 @@ npm run sync:cards
 ```bash
 drwn library add skill /path/to/darwinian-minds-skills
 drwn skills packages show darwinian-minds-skills
-drwn add skill inspect-harness --dry-run --json
+drwn add skill inspect-minds --dry-run --json
 ```
 
 Use `drwn add skill <name>` for one project, or
@@ -137,7 +132,7 @@ Every mutating skill follows the same pattern:
 5. Run the real command.
 6. Verify the result with a follow-up read-only command.
 
-`inspect-harness`, `recommend-harness`, and `audit-mind-visibility` are
+`inspect-minds`, `recommend-minds`, and `audit-mind-visibility` are
 strictly read-only.
 
 ## Examples
@@ -165,8 +160,6 @@ DRWN_BIN="bun ~/dev/darwinian-minds/cli/index.ts" npm run smoke:cli
 - Claude Code current plugin system
 - Codex plugin / skill install surfaces
 - Other runtimes via `npx skills add`
-- Legacy `apply-harness-card`, `author-harness-card`, and
-  `share-harness-card` aliases for one compatibility release
 
 Installation commands outside Claude Code should be smoke-tested before a
 public release because those distribution surfaces evolve independently.
