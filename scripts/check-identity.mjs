@@ -84,7 +84,7 @@ for (const file of publicFiles) {
 }
 
 const readme = readText("README.md");
-assert(readme.includes("@darwinian/mind-skills"), "README.md must document @darwinian/mind-skills", errors);
+assert(readme.includes("@darwinian/operator"), "README.md must document @darwinian/operator", errors);
 assert(readme.includes("@darwinian/base-mind"), "README.md must document @darwinian/base-mind", errors);
 assert(readme.includes("npm run check:identity"), "README.md must document identity validation", errors);
 

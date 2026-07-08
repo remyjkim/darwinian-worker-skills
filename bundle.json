@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "bundleName": "darwinian-minds-skills",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "displayName": "Darwinian Minds Skills",
   "description": "Agent skills and mind-card content for operating Darwinian Minds through the drwn CLI.",
   "skills": [
@@ -26,44 +26,29 @@
       "path": "skills/share-mind-card"
     },
     {
-      "name": "apply-harness-card",
+      "name": "install-project",
       "scope": "shared",
-      "path": "skills/apply-harness-card"
+      "path": "skills/install-project"
     },
     {
-      "name": "author-harness-card",
+      "name": "inspect-minds",
       "scope": "shared",
-      "path": "skills/author-harness-card"
+      "path": "skills/inspect-minds"
     },
     {
-      "name": "share-harness-card",
+      "name": "materialize-minds",
       "scope": "shared",
-      "path": "skills/share-harness-card"
+      "path": "skills/materialize-minds"
     },
     {
-      "name": "install-harness-project",
+      "name": "manage-library",
       "scope": "shared",
-      "path": "skills/install-harness-project"
+      "path": "skills/manage-library"
     },
     {
-      "name": "inspect-harness",
+      "name": "repair-minds",
       "scope": "shared",
-      "path": "skills/inspect-harness"
-    },
-    {
-      "name": "materialize-harness",
-      "scope": "shared",
-      "path": "skills/materialize-harness"
-    },
-    {
-      "name": "manage-harness-library",
-      "scope": "shared",
-      "path": "skills/manage-harness-library"
-    },
-    {
-      "name": "repair-harness",
-      "scope": "shared",
-      "path": "skills/repair-harness"
+      "path": "skills/repair-minds"
     },
     {
       "name": "manage-defaults",
@@ -71,14 +56,14 @@
       "path": "skills/manage-defaults"
     },
     {
-      "name": "recommend-harness",
+      "name": "recommend-minds",
       "scope": "shared",
-      "path": "skills/recommend-harness"
+      "path": "skills/recommend-minds"
     },
     {
-      "name": "support-harness",
+      "name": "support-minds",
       "scope": "shared",
-      "path": "skills/support-harness"
+      "path": "skills/support-minds"
     },
     {
       "name": "sync-card-skills",

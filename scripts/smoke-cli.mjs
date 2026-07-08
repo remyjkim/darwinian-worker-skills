@@ -51,14 +51,14 @@ function assertMissing(path, label) {
 try {
   run("--version");
   run("init --non-interactive");
-  run(`card apply file:${join(rootDir, "cards", "base-mind")} file:${join(rootDir, "cards", "mind-skills")}`);
+  run(`card apply file:${join(rootDir, "cards", "base-mind")} file:${join(rootDir, "cards", "operator")}`);
   run("write --dry-run --json");
   run("write");
   run("mind list --json");
 
   const generatedDir = join(project, ".agents", "drwn", "generated");
   assertExists(join(generatedDir, "minds", "@darwinian", "base-mind", "mind.json"), "per-mind bundle");
-  assertExists(join(generatedDir, "minds", "@darwinian", "mind-skills", "mind.json"), "primary tools mind bundle");
+  assertExists(join(generatedDir, "minds", "@darwinian", "operator", "mind.json"), "primary tools mind bundle");
   assertExists(join(generatedDir, "mind", "mind.json"), "composed mind");
   assertExists(join(project, ".claude", "skills", "manage-active-mind-stack", "SKILL.md"), "projected Claude skill");
   assertExists(join(project, ".claude", "skills", "apply-mind-card", "SKILL.md"), "projected primary Claude skill");
@@ -68,7 +68,7 @@ try {
   run("mind clear --json");
   run("write");
   assertExists(join(generatedDir, "minds", "@darwinian", "base-mind", "mind.json"), "per-mind bundle after clear");
-  assertExists(join(generatedDir, "minds", "@darwinian", "mind-skills", "mind.json"), "primary tools mind bundle after clear");
+  assertExists(join(generatedDir, "minds", "@darwinian", "operator", "mind.json"), "primary tools mind bundle after clear");
   assertMissing(join(generatedDir, "mind"), "composed mind after clear");
   assertMissing(join(project, ".claude", "skills", "manage-active-mind-stack"), "projected Claude skill after clear");
   assertMissing(join(project, ".claude", "skills", "apply-mind-card"), "projected primary Claude skill after clear");

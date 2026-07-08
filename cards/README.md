@@ -7,22 +7,18 @@ skills.
 
 | Card | Purpose | Contents |
 | --- | --- | --- |
-| `@darwinian/mind-skills` | Primary tools-only card for current Darwinian Minds workflows | Stable workflow skills, mind-stack skills, MCP import, and card source sync |
+| `@darwinian/operator` | Primary card for operating Darwinian Minds through `drwn` | Stable workflow skills, mind-stack skills, MCP import, and card source sync |
 | `@darwinian/base-mind` | BaseMind card for operating mind composition itself | Persona, public beliefs, and `manage-active-mind-stack`, `author-mind-content`, `audit-mind-visibility` |
-| `@darwinian/harness-skills` | Compatibility tools card for one release | Primary skills plus legacy alias wrappers |
 | `@darwinian/workspace-experimental` | Explicitly experimental card for the future workspace organizer stub | `organize-workspace` |
 
 ## Why Multiple Cards
 
-`@darwinian/mind-skills` is the primary card most users should apply when they
+`@darwinian/operator` is the primary card most users should apply when they
 want the Darwinian Minds operator skills.
 
 `@darwinian/base-mind` carries richer mind content and stays intentionally
 small: it includes only the persona, beliefs, and skills needed to activate,
 author, and audit mind cards.
-
-`@darwinian/harness-skills` remains as a compatibility card so older projects
-and prompts keep working while documentation moves to Mind Card terminology.
 
 `organize-workspace` is split into its own experimental card because it remains
 a future placeholder and should not make the main card look more complete than
@@ -51,7 +47,7 @@ npm run sync:cards -- --check
 Use `file:` refs during local development:
 
 ```bash
-drwn card apply file:/path/to/darwinian-minds-skills/cards/mind-skills
+drwn card apply file:/path/to/darwinian-minds-skills/cards/operator
 drwn write --dry-run --json
 ```
 
@@ -66,4 +62,4 @@ If you want a normal published local-store card instead of a `file:` ref:
 2. Run `drwn card source doctor <name> --json`
 3. Run `drwn card publish <name>`
 4. Validate with `drwn card validate <name>@<version> --json`
-5. Apply the published ref with `drwn card apply @darwinian/mind-skills@<version>`
+5. Apply the published ref with `drwn card apply @darwinian/operator@<version>`
