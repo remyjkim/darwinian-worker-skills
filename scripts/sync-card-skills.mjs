@@ -7,6 +7,22 @@ import { join, relative } from "node:path";
 import { cardMaps, rootDir } from "./card-map.mjs";
 
 const checkMode = process.argv.includes("--check");
+const cardOptionIndex = process.argv.indexOf("--card");
+const requestedCard = cardOptionIndex === -1 ? undefined : process.argv[cardOptionIndex + 1];
+
+if (cardOptionIndex !== -1 && (!requestedCard || requestedCard.startsWith("--"))) {
+  console.error("✘ --card requires a Card slug");
+  process.exit(1);
+}
+
+const selectedCards = requestedCard
+  ? cardMaps.filter((card) => card.slug === requestedCard)
+  : cardMaps;
+
+if (requestedCard && selectedCards.length === 0) {
+  console.error(`✘ Unknown Card slug: ${requestedCard}`);
+  process.exit(1);
+}
 
 function listFiles(dir, prefix = "") {
   if (!existsSync(dir)) {
@@ -76,18 +92,18 @@ function checkCard(card) {
 }
 
 if (checkMode) {
-  const errors = cardMaps.flatMap((card) => checkCard(card));
+  const errors = selectedCards.flatMap((card) => checkCard(card));
   if (errors.length > 0) {
     for (const error of errors) {
       console.error(`✘ ${error}`);
     }
     process.exit(1);
   }
-  console.log("✓ Card-bundled skills are in sync.");
+  console.log(`✓ Card-bundled skills are in sync: ${selectedCards.map((card) => card.slug).join(", ")}`);
   process.exit(0);
 }
 
-for (const { targetDir, skills } of cardMaps) {
+for (const { targetDir, skills } of selectedCards) {
   mkdirSync(targetDir, { recursive: true });
 
   for (const entry of readdirSync(targetDir)) {
@@ -102,4 +118,4 @@ for (const { targetDir, skills } of cardMaps) {
   }
 }
 
-console.log("Synced card-bundled skills.");
+console.log(`Synced card-bundled skills: ${selectedCards.map((card) => card.slug).join(", ")}`);

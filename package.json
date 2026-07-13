@@ -26,6 +26,8 @@
     "check:paths": "node scripts/check-no-local-paths.mjs",
     "lint:md": "markdownlint-cli2 \"**/*.md\" \"!node_modules/**\"",
     "smoke:cli": "node scripts/smoke-cli.mjs",
+    "test:base-mind-contract": "node --test test/base-mind-contract.test.mjs",
+    "test:operator-contract": "node --test test/operator-contract.test.mjs",
     "validate:cards": "node scripts/validate-cards.mjs",
     "validate:skills": "node scripts/validate-skills.mjs",
     "sync:cards": "node scripts/sync-card-skills.mjs"

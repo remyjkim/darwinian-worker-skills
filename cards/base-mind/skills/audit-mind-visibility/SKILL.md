@@ -1,110 +1,66 @@
 ---
 name: audit-mind-visibility
-description: "Use when the user says /audit-mind-visibility, wants to check if a mind is safe to push, audit visibility settings across cards, or detect strictest-visibility before publishing. Read-only walk over installed and authored cards."
+description: "Use when auditing persona and belief visibility in Mind capability Cards before publication or push, while reporting DB-native memory declarations separately."
 ---
 
 # audit-mind-visibility
 
-**Assumes**: `drwn` on PATH.
+Perform a read-only audit of distributable persona and belief content. Memory
+has no visibility field: semantic observations and insights are DB-native live
+state, so report their declaration separately and exclude them from the Card
+push verdict.
 
-## Input
+## Inputs
 
-Parse target — single card name, all installed cards in the current
-project, or all card sources authored on this machine. If absent, default
-to "all installed cards in the current project."
+- One published Card reference, one editable Card source, or every Card in the
+  current project's locked Worker closure.
+- Optional source mode for all editable sources on this machine.
+- Optional explicit remote classification: `private`, `internal`, `public`,
+  or `unknown`.
 
-Invocation forms:
+## Workflow
 
-- `/audit-mind-visibility` — defaults to all installed cards in the
-  current project.
-- `/audit-mind-visibility <card-name>` — single card.
-- `/audit-mind-visibility --sources` — all authored sources on this
-  machine.
-- Prose: "is my notion mind safe to push", "what's the visibility on my
-  cards", "audit visibility before I push".
+1. Enumerate the requested read-only surface:
+   - Project closure: `drwn card status --json`.
+   - Published Card: `drwn card show <ref> --json`.
+   - Editable source: `drwn card source show <card> --json`.
+   - All editable sources: `drwn card source list --json`, followed by source
+     inspection for each result.
+2. For each manifest, enumerate persona and beliefs entries with their required
+   section visibility. Compute the strictest distributable visibility using
+   `private` before `internal` before `public`.
+3. Report the optional Mind capability separately:
+   - `memory.observations.format` must be `jsonl` when declared.
+   - `memory.insights.format` must be `md` when declared.
+   - An absent memory declaration means the Card does not itself opt the
+     Worker closure into the Mind capability.
+4. Read configured remotes with `drwn card remote list <card> --json` when a
+   source remote is relevant. Treat local paths and `file://` URLs as private.
+   Treat network remotes as unknown unless the user explicitly classifies
+   them; never infer trust from a host or organization name.
+5. Compare strictest Card visibility with the remote classification:
+   - Private content may go only to a private remote.
+   - Internal content may go to a private or internal remote.
+   - Public content may go to a classified private, internal, or public remote.
+   - Unknown network classification is unresolved and must be classified
+     before push.
+6. Return a table with Card/ref, persona visibility, beliefs visibility,
+   strictest distributable visibility, semantic Mind declaration, remote, and
+   verdict.
 
-## Directive
+## Boundaries
 
-1. **Enumerate targets**:
-   - Installed-in-project: `drwn card status --json` → `locked[].name`.
-   - Single card: passed as argument.
-   - All sources: `drwn card source list --json` → walk each source.
-2. **For each target**, read manifest visibility:
-   - Installed: `drwn card show <card> --json`.
-   - Source: `drwn card source show <card> --json`.
-   - Enumerate visibility per `persona`/`beliefs`/`memory.l4`/`memory.l5`/
-     `memory.l6` section.
-   - Note: tools-only cards (no persona/beliefs/memory) have **no
-     visibility declarations** and bypass the gate entirely; surface this
-     as "no visibility constraints; pushes freely."
-3. **Compute strictest visibility** across all declaring sections:
-   - Order: `private` > `internal` > `public`.
-   - If any section is `private`, strictest is `private`.
-   - The push gate uses the strictest, not section-by-section.
-4. **If a remote is configured** for the card (`drwn card remote list <card>`):
-   - Classify only what the CLI can know:
-     - Local paths and `file://` URLs -> `private`.
-     - Network remotes -> `unknown` unless the user supplies
-       `--remote-visibility private|internal|public|unknown`.
-   - Do not infer trusted organizations from the host or owner. The CLI's push
-     gate requires explicit user classification for network remotes.
-   - Compare strictest visibility to the explicit remote classification:
-     - `private` content + `private` remote → push OK.
-     - `private` content + `internal`/`public`/`unknown` remote → push BLOCKED.
-     - `internal` content + `private`/`internal` remote → push OK.
-     - `internal` content + `public`/`unknown` remote → push BLOCKED.
-     - `public` content + `private`/`internal`/`public` remote → push OK.
-     - `public` content + `unknown` remote → ask for classification before
-       push so the command records intent.
-5. **Report a table** to the user:
+- Make no file, config, lock, remote, publication, or projection mutation.
+- Do not inspect live observations or insights; this is a Card-source audit.
+- Do not treat a semantic memory declaration as distributable content.
+- Do not use an unsafe push override on the user's behalf.
 
-   ```text
-   card                        strictest    remote                      push verdict
-   --------------------------- ------------ --------------------------- ------------
-   @darwinian/base-mind        public       git@github.com:darwinian/.. needs classification
-   @scope/private-notes        private      git@github.com:scope/..     BLOCKED unknown
-   @scope/team-card            internal     (not configured)            n/a
-   @darwinian/mind-skills      (none)       git@github.com:darwinian/.. OK tools-only
-   ```
+## Failure Handling
 
-6. **For BLOCKED cards**, surface the exact override flags:
-   - `drwn card push <card> --remote-visibility <v>` to declare the remote
-     as that visibility level (use only if the user really controls the
-     remote's classification).
-   - `drwn card push <card> --remote-visibility public --unsafe-push-public`
-     only after the user explicitly accepts pushing stricter content to a less
-     restrictive public remote.
-7. **No mutations** — this skill is read-only.
-
-## Output
-
-A read-only audit report. No file changes, no pushes, no commits.
-
-## Failure Modes
-
-- **Card not installed**: skip with a note ("@scope/foo not installed; use
-  `drwn card add` first if you want to audit installed state").
-- **No card sources on this machine** with `--sources`: report empty,
-  suggest `drwn card new`.
-- **Manifest read fails**: surface the error per card; continue with
-  others.
-- **Remote classification ambiguous**: report `unknown`, not `public`, and
-  require the user to choose `--remote-visibility` before push.
-
-## Wraps
-
-`drwn card status --json`, `drwn card show --json`,
-`drwn card source list --json`, `drwn card source show --json`,
-`drwn card remote list --json`. No mutations.
-
-## Notes
-
-- Visibility is per-section on the card; the gate uses the strictest
-  across all sections that declare it.
-- Tools-only cards bypass the gate entirely (no `persona`/`beliefs`/`memory`
-  means nothing to gate). Surface this clearly so users don't think
-  the audit missed something.
-- Visibility classifications evolve. Re-run this audit before each major
-  push, not just once at authoring.
-- See the `visibility-discipline` belief in this card for the model behind
-  these classifications.
+- Report an unreadable manifest as unresolved; do not guess.
+- Report a Card with no persona or beliefs as having no distributable
+  visibility constraint.
+- Report malformed or partial semantic memory declarations as invalid and
+  direct the user to `drwn card source doctor <card> --json`.
+- Continue the audit for independent Cards, but keep each unresolved result
+  visible in the final report.

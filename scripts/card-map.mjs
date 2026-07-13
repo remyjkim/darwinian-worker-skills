@@ -18,7 +18,6 @@ export const PRIMARY_STABLE_SKILLS = [
 ];
 
 export const BASE_MIND_SKILLS = [
-  "manage-active-mind-stack",
   "author-mind-content",
   "audit-mind-visibility",
 ];
