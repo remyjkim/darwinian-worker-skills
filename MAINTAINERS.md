@@ -1,75 +1,66 @@
 # Maintainers Guide
 
-## Release Process
+## Release Contract
 
-Releases are SemVer and keyed off the root `VERSION` file.
+Releases are SemVer and keyed off the root `VERSION` file. Operator releases
+must preserve a single canonical skill allowlist in `scripts/card-map.mjs` and
+byte-identical generated Card copies.
 
-### Cutting A Release
+## Cutting A Release
 
-1. Update `VERSION`.
-2. Update version fields in `.claude-plugin/plugin.json`,
-   `.claude-plugin/marketplace.json`, `.codex-plugin/plugin.json`, and
-   `package.json`.
+1. Update `VERSION`, `package.json`, `package-lock.json`, `bundle.json`, and
+   both plugin metadata trees.
+2. Update the Operator Card version independently when its public payload
+   changes.
 3. Run `npm install --package-lock-only --ignore-scripts`.
-4. Update `bundle.json` so `bundleName`, `version`, and skill entries match
-   the package.
-5. Run `npm run sync:cards`.
-6. Open a release PR.
-7. On merge to `main`, `create-tag.yml` tags `v<version>`.
-8. `publish-release.yml` creates a GitHub Release.
+4. Run `npm run sync:cards`.
+5. Run every release check below from a clean checkout.
+6. Review generated Card changes and immutable release coordinates.
+7. Merge the release change before creating tags or publishing artifacts.
 
-### Manual Checks Before Release
+## Required Checks
 
-- `npm run sync:cards`
-- `npm run sync:cards -- --check`
-- `npm run check:identity`
-- `npm run lint:md`
-- `npm run validate:skills`
-- `DRWN_BIN="<repo-local-or-installed-drwn>" npm run validate:cards`
-- `DRWN_BIN="<repo-local-or-installed-drwn>" npm run smoke:cli`
-- `drwn library add skill . --json` and
-  `drwn skills packages show darwinian-worker-skills --json` from a disposable
-  `HOME`
-- Smoke-test at least one skill in Claude Code or Codex
-- Reconfirm that referenced `drwn` commands still exist in the current CLI
+```bash
+npm run test:operator-contract
+npm run sync:cards -- --check
+npm run check:identity
+npm run check:paths
+npm run lint:md
+npm run validate:skills
+DRWN_BIN="<repo-local-or-installed-drwn>" npm run validate:cards
+DRWN_BIN="<repo-local-or-installed-drwn>" npm run smoke:cli
+```
 
-### Main Repo Coordination
+Also install the package in a disposable home and verify inactive inventory:
 
-After the skills repo change is accepted, update the Darwinian Worker CLI repo:
+```bash
+drwn machine skill install . --json
+drwn machine skill show --package darwinian-worker-skills --json
+```
 
-1. Point the submodule URL at
-   `https://github.com/remyjkim/darwinian-worker-skills.git`.
-2. Update the submodule pointer to the accepted skills repo commit.
-3. Update downstream docs and lockfiles that still use singular
-   `darwinian-mind*` names according to the task plan.
-4. Run the CLI repo release-readiness checks.
+Smoke-test at least one Operator skill in Claude Code or Codex and confirm that
+every referenced `drwn` command exists in the supported CLI.
 
-## Reviewing Skill Changes
+## Review Rules
 
-1. Frontmatter uses only `name` and `description`.
-2. Every mutating procedure previews or explicitly describes the mutation before
-   it runs.
-3. User-ask points line up with real mutations.
-4. `Wraps` lists every `drwn` command actually used.
-5. `Scope` and `Failure modes` are explicit.
-6. If the skill is bundled into a card, re-run `npm run sync:cards` and review
-   the copied card skill directory too.
+1. Skill frontmatter contains only `name` and `description`.
+2. Trigger descriptions state when the skill should be selected.
+3. Mutations are previewed or described before approval.
+4. Project, machine, Card source, remote, and catalog ownership stay distinct.
+5. Operator contains only its approved eight skills.
+6. Generated Operator copies are byte-identical to canonical sources.
+7. Dedicated optional runtime skills never enter Operator transitively.
+8. No skill teaches a removed command namespace or compatibility alias.
 
-## Adding Distribution Channels
+## Main Repository Coordination
 
-1. Determine whether the new channel reads `skills/<name>/SKILL.md` directly or
-   needs an extra manifest.
-2. Add the manifest under a channel-specific directory if required.
-3. Update install docs.
-4. Bump `VERSION` minor.
+After the skills repository release is accepted:
 
-## Coordinating With Darwinian Worker
-
-The skills in this repo wrap `drwn`. When the CLI changes:
-
-- Additive changes: update the relevant skills opportunistically.
-- Breaking changes: update the affected skill bodies and release a new version.
-- Safety gaps: file them in the CLI repo; do not silently paper over them here.
+1. Update the Darwinian Worker submodule pointer to the accepted commit.
+2. Update the pinned Operator profile descriptor to the immutable Card ref,
+   commit, tree hash, and integrity.
+3. Run the CLI repository contract and release-readiness checks.
+4. Publish only after the protected release gate succeeds from committed state.
 
 ## Owners
 

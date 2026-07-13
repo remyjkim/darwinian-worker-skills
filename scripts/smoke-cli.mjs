@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-// ABOUTME: Runs an isolated drwn smoke test against local cards in a temp project.
-// ABOUTME: Exercises init, card apply, write, mind list, mind clear, and artifacts.
+// ABOUTME: Runs an isolated drwn smoke test against the local Operator Card.
+// ABOUTME: Exercises init, singular Worker selection, projection, and clearing selection.
 
 import { existsSync, mkdtempSync, mkdirSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -51,29 +51,27 @@ function assertMissing(path, label) {
 try {
   run("--version");
   run("init --non-interactive");
-  run(`card apply file:${join(rootDir, "cards", "base-mind")} file:${join(rootDir, "cards", "operator")}`);
+  run(`apply file:${join(rootDir, "cards", "operator")} --active @darwinian/operator`);
   run("write --dry-run --json");
   run("write");
-  run("mind list --json");
+  run("status --json --explain");
 
   const generatedDir = join(project, ".agents", "drwn", "generated");
-  assertExists(join(generatedDir, "minds", "@darwinian", "base-mind", "mind.json"), "per-mind bundle");
-  assertExists(join(generatedDir, "minds", "@darwinian", "operator", "mind.json"), "primary tools mind bundle");
-  assertExists(join(generatedDir, "mind", "mind.json"), "composed mind");
-  assertExists(join(project, ".claude", "skills", "manage-active-mind-stack", "SKILL.md"), "projected Claude skill");
-  assertExists(join(project, ".claude", "skills", "apply-mind-card", "SKILL.md"), "projected primary Claude skill");
-  assertExists(join(project, ".codex", "skills", "manage-active-mind-stack", "SKILL.md"), "projected Codex skill");
-  assertExists(join(project, ".codex", "skills", "apply-mind-card", "SKILL.md"), "projected primary Codex skill");
+  const workerDir = join(generatedDir, "workers", "@darwinian", "operator");
+  assertExists(join(workerDir, "worker.json"), "Operator Worker bundle");
+  assertExists(join(generatedDir, "workers.json"), "Worker registry");
+  assertExists(join(generatedDir, "active-worker.json"), "active Worker selection");
+  assertExists(join(project, ".claude", "skills", "manage-project-worker", "SKILL.md"), "projected Claude skill");
+  assertExists(join(project, ".codex", "skills", "manage-project-worker", "SKILL.md"), "projected Codex skill");
+  assertMissing(join(project, ".claude", "skills", "manage-active-mind-stack"), "retired Operator skill");
+  assertMissing(join(project, ".codex", "skills", "apply-mind-card"), "retired Operator skill");
 
-  run("mind clear --json");
+  run("use --none --no-write");
   run("write");
-  assertExists(join(generatedDir, "minds", "@darwinian", "base-mind", "mind.json"), "per-mind bundle after clear");
-  assertExists(join(generatedDir, "minds", "@darwinian", "operator", "mind.json"), "primary tools mind bundle after clear");
-  assertMissing(join(generatedDir, "mind"), "composed mind after clear");
-  assertMissing(join(project, ".claude", "skills", "manage-active-mind-stack"), "projected Claude skill after clear");
-  assertMissing(join(project, ".claude", "skills", "apply-mind-card"), "projected primary Claude skill after clear");
-  assertMissing(join(project, ".codex", "skills", "manage-active-mind-stack"), "projected Codex skill after clear");
-  assertMissing(join(project, ".codex", "skills", "apply-mind-card"), "projected primary Codex skill after clear");
+  assertExists(join(workerDir, "worker.json"), "installed Operator Worker bundle after clear");
+  assertMissing(join(generatedDir, "active-worker.json"), "active Worker selection after clear");
+  assertMissing(join(project, ".claude", "skills", "manage-project-worker"), "projected Claude skill after clear");
+  assertMissing(join(project, ".codex", "skills", "manage-project-worker"), "projected Codex skill after clear");
 
   console.log(`✓ Isolated CLI smoke passed in ${project}`);
 } catch (error) {

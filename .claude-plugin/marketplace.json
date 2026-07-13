@@ -5,14 +5,14 @@
   },
   "metadata": {
     "description": "Darwinian Worker agent skills marketplace.",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "pluginRoot": "."
   },
   "plugins": [
     {
       "name": "darwinian",
-      "description": "Darwinian Worker skills wrapping the drwn CLI: bootstrap, install, materialize, Mind Cards, library, defaults, diagnostics, support, repair, and recommendations.",
-      "version": "0.4.0",
+      "description": "Darwinian Worker skills wrapping the drwn CLI for Worker, Card, inventory, machine capability, inspection, and repair operations.",
+      "version": "0.5.0",
       "source": "./",
       "author": {
         "name": "Remy Kim"
@@ -23,13 +23,13 @@
       "keywords": [
         "drwn",
         "darwinian-minds",
-        "mind-cards"
+        "worker-cards"
       ],
       "category": "developer-tools",
       "tags": [
         "cli-wrapper",
         "agent-driven",
-        "mind-cards"
+        "worker-cards"
       ]
     }
   ]

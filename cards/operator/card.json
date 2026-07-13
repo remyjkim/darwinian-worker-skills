@@ -1,27 +1,22 @@
 {
   "name": "@darwinian/operator",
-  "version": "1.0.1",
-  "description": "Primary Darwinian Worker card: the skills an agent needs to operate minds through drwn — bootstrap, cards, library, defaults, inspection, repair, and support.",
+  "version": "2.0.0",
+  "description": "Primary Darwinian Worker Card for project bootstrap, Worker and Card operations, machine capabilities, inspection, and repair.",
   "skills": {
     "include": [
       "bootstrap-project",
-      "apply-mind-card",
-      "author-mind-card",
-      "install-project",
-      "inspect-minds",
-      "materialize-minds",
-      "manage-library",
-      "repair-minds",
-      "manage-defaults",
-      "recommend-minds",
-      "share-mind-card",
-      "support-minds",
-      "sync-card-skills",
-      "import-mcp-from-claude",
-      "manage-active-mind-stack",
-      "author-mind-content",
-      "audit-mind-visibility"
+      "manage-project-worker",
+      "inspect-worker",
+      "repair-worker",
+      "author-card",
+      "share-card",
+      "manage-machine-inventory",
+      "manage-machine-capabilities"
     ]
   },
-  "servers": {}
+  "servers": {},
+  "harness": {
+    "minVersion": "0.9.0"
+  },
+  "lastValidatedWith": "0.9.0"
 }

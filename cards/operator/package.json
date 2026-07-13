@@ -1,6 +1,6 @@
 {
   "name": "@darwinian/operator",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "private": true,
-  "description": "Primary Darwinian Worker card: the skills an agent needs to operate minds through drwn."
+  "description": "Primary Darwinian Worker Card for Worker, Card, and capability operations through drwn."
 }

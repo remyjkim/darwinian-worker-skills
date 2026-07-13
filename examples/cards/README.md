@@ -1,34 +1,19 @@
-# Example Mind Cards
+# Example Cards
 
-This directory contains minimal reference Mind Cards for documentation
-purposes. These are not published cards and should not be treated as production
-assets.
+This directory contains minimal documentation examples. They are not published
+artifacts.
 
-To author your own card, invoke `author-mind-card` or run
-`drwn card new <name>` directly.
+Use `author-card` or `drwn card new <name>` to create a supported editable
+source. The static `minimal-card` example contains one bundled skill and no MCP
+servers.
 
-## minimal-card
-
-A bare-bones card with one bundled skill and no MCP servers.
-
-To try it locally, substitute `@your-handle` with your actual GitHub handle (or
-any `@<scope>` you publish under) in both the directory layout and the card
-manifest so the source directory matches `card.json`'s `name`. `drwn card new`
-auto-derives the same handle from `gh api user` or `git config --global
-github.user` for new authoring sources; for this static example you do the
-substitution by hand.
+To exercise it, replace `@your-handle` with the intended scope in the manifest
+and bundled skill, copy it into the matching editable source directory, then
+publish and select the immutable ref:
 
 ```bash
-HANDLE=@your-handle  # e.g., @junggyu
-mkdir -p ~/.agents/drwn/sources/$HANDLE
-cp -r examples/cards/minimal-card ~/.agents/drwn/sources/$HANDLE/minimal-card
-sed -i.bak "s|@your-handle/|$HANDLE/|g" \
-  ~/.agents/drwn/sources/$HANDLE/minimal-card/card.json \
-  ~/.agents/drwn/sources/$HANDLE/minimal-card/skills/hello-world/SKILL.md
-drwn card source doctor $HANDLE/minimal-card --json
-drwn card publish $HANDLE/minimal-card
-cd ~/sandbox-project
-drwn card apply $HANDLE/minimal-card@0.1.0
+drwn card source doctor @your-handle/minimal-card --json
+drwn card publish @your-handle/minimal-card
+drwn use @your-handle/minimal-card@0.1.0 --dry-run
 drwn write --dry-run --json
-drwn write
 ```

@@ -8,22 +8,13 @@ export const rootDir = dirname(dirname(fileURLToPath(import.meta.url)));
 
 export const PRIMARY_STABLE_SKILLS = [
   "bootstrap-project",
-  "apply-mind-card",
-  "author-mind-card",
-  "install-project",
-  "inspect-minds",
-  "materialize-minds",
-  "manage-library",
-  "repair-minds",
-  "manage-defaults",
-  "recommend-minds",
-  "share-mind-card",
-  "support-minds",
-  "sync-card-skills",
-  "import-mcp-from-claude",
-  "manage-active-mind-stack",
-  "author-mind-content",
-  "audit-mind-visibility",
+  "manage-project-worker",
+  "inspect-worker",
+  "repair-worker",
+  "author-card",
+  "share-card",
+  "manage-machine-inventory",
+  "manage-machine-capabilities",
 ];
 
 export const BASE_MIND_SKILLS = [

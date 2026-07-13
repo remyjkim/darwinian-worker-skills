@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "bundleName": "darwinian-worker-skills",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "displayName": "Darwinian Worker Skills",
-  "description": "Agent skills and mind-card content for operating Darwinian Worker through the drwn CLI.",
+  "description": "Agent skills for operating Darwinian Worker, Cards, and machine capabilities through the drwn CLI.",
   "skills": [
     {
       "name": "bootstrap-project",
@@ -11,74 +11,44 @@
       "path": "skills/bootstrap-project"
     },
     {
-      "name": "apply-mind-card",
+      "name": "manage-project-worker",
       "scope": "shared",
-      "path": "skills/apply-mind-card"
+      "path": "skills/manage-project-worker"
     },
     {
-      "name": "author-mind-card",
+      "name": "inspect-worker",
       "scope": "shared",
-      "path": "skills/author-mind-card"
+      "path": "skills/inspect-worker"
     },
     {
-      "name": "share-mind-card",
+      "name": "repair-worker",
       "scope": "shared",
-      "path": "skills/share-mind-card"
+      "path": "skills/repair-worker"
     },
     {
-      "name": "install-project",
+      "name": "author-card",
       "scope": "shared",
-      "path": "skills/install-project"
+      "path": "skills/author-card"
     },
     {
-      "name": "inspect-minds",
+      "name": "share-card",
       "scope": "shared",
-      "path": "skills/inspect-minds"
+      "path": "skills/share-card"
     },
     {
-      "name": "materialize-minds",
+      "name": "manage-machine-inventory",
       "scope": "shared",
-      "path": "skills/materialize-minds"
+      "path": "skills/manage-machine-inventory"
     },
     {
-      "name": "manage-library",
+      "name": "manage-machine-capabilities",
       "scope": "shared",
-      "path": "skills/manage-library"
-    },
-    {
-      "name": "repair-minds",
-      "scope": "shared",
-      "path": "skills/repair-minds"
-    },
-    {
-      "name": "manage-defaults",
-      "scope": "shared",
-      "path": "skills/manage-defaults"
-    },
-    {
-      "name": "recommend-minds",
-      "scope": "shared",
-      "path": "skills/recommend-minds"
+      "path": "skills/manage-machine-capabilities"
     },
     {
       "name": "support-minds",
       "scope": "shared",
       "path": "skills/support-minds"
-    },
-    {
-      "name": "sync-card-skills",
-      "scope": "shared",
-      "path": "skills/sync-card-skills"
-    },
-    {
-      "name": "import-mcp-from-claude",
-      "scope": "shared",
-      "path": "skills/import-mcp-from-claude"
-    },
-    {
-      "name": "manage-active-mind-stack",
-      "scope": "shared",
-      "path": "skills/manage-active-mind-stack"
     },
     {
       "name": "author-mind-content",

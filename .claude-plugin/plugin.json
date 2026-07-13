@@ -1,7 +1,7 @@
 {
   "name": "darwinian",
-  "version": "0.4.0",
-  "description": "Agent skills for operating Darwinian Worker through drwn: bootstrap projects, install locked cards, materialize downstream state, manage Mind Cards, manage library/defaults, and inspect, support, or repair mind state.",
+  "version": "0.5.0",
+  "description": "Agent skills for operating Darwinian Worker through drwn: bootstrap projects, manage Workers and Cards, manage machine capabilities, inspect, and repair.",
   "author": {
     "name": "Remy Kim"
   },
@@ -11,7 +11,7 @@
   "keywords": [
     "drwn",
     "darwinian-minds",
-    "mind-cards",
+    "worker-cards",
     "claude-code",
     "codex",
     "cursor",

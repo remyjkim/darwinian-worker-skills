@@ -1,6 +1,6 @@
 {
   "name": "darwinian",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Agent skills for operating Darwinian Worker through the drwn CLI for Codex.",
   "author": {
     "name": "Remy Kim"
@@ -11,14 +11,14 @@
   "keywords": [
     "drwn",
     "darwinian-minds",
-    "mind-cards",
+    "worker-cards",
     "codex"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Darwinian Worker Skills",
     "shortDescription": "Agent skills wrapping the drwn CLI.",
-    "longDescription": "Bootstrap projects, install locked cards, materialize downstream state, apply, author, and share reusable Mind Cards, manage local library/defaults, and inspect, support, or repair mind state with approval checkpoints at consequential writes.",
+    "longDescription": "Bootstrap projects, manage one selected Worker and its Cards, author and share capability Cards, manage inventory and machine capabilities, and inspect or repair state with approval checkpoints.",
     "developerName": "Remy Kim",
     "category": "developer-tools",
     "capabilities": [
@@ -29,9 +29,9 @@
     "defaultPrompt": [
       "Bootstrap Darwinian Worker in this repo",
       "Install the locked cards for this cloned project",
-      "Apply a Darwinian Worker Mind Card",
+      "Select a Worker for this project",
       "Inspect why this skill is active",
-      "Repair my mind state"
+      "Repair Worker projection state"
     ]
   }
 }
