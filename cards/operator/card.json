@@ -1,6 +1,6 @@
 {
   "name": "@darwinian/operator",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Primary Darwinian Worker Card for project bootstrap, Worker and Card operations, machine capabilities, inspection, and repair.",
   "skills": {
     "include": [
