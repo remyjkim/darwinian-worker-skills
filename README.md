@@ -6,7 +6,7 @@ Code, Codex, Cursor, and other compatible environments.
 ## Operator Card
 
 `@darwinian/operator` is the primary Worker/Card operations package. Version
-`2.0.0` contains exactly eight skills:
+`2.0.2` contains exactly eight skills:
 
 | Skill | Responsibility |
 | --- | --- |
@@ -50,16 +50,20 @@ drwn machine skill install /path/to/darwinian-worker-skills --json
 drwn machine skill show --package darwinian-worker-skills --json
 ```
 
-Activate one standalone skill explicitly at machine scope:
+Standalone inventory does not activate machine capabilities. Select a Worker
+Blueprint whose immutable Card closure includes the desired skill package:
 
 ```bash
-drwn machine skill enable inspect-worker --dry-run --json
-drwn machine skill enable inspect-worker
+drwn apply --root <worker-blueprint-ref>
 drwn write --root --dry-run --json
+drwn write --root
 ```
 
-Projects declare their own Worker and capability intent; machine activation is
-not inherited into project declarations.
+`drwn machine skill|mcp enable|disable` is retired. Inventory list, show,
+install, update, uninstall, add, remove, references, and transfer operations
+remain available, but machine activation derives only from the active Blueprint
+closure. Projects declare their own Worker and capability intent; the machine
+Worker is not inherited into project declarations.
 
 ### Claude Code
 
@@ -121,7 +125,9 @@ DRWN_BIN="bun ~/dev/darwinian-minds/cli/index.ts" npm run smoke:cli
 
 ## Compatibility
 
-- Operator Card `2.0.0` requires `drwn` `0.9.0` or newer.
+- Operator Card `2.0.2` requires `drwn` `1.1.0` or newer. It must not be
+  published or marked `lastValidatedWith` until I177's CLI and release checks
+  pass against the immutable Card source.
 - Root skill bundle schema version 1.
 - Claude Code and Codex plugin manifests are versioned with the root package.
 

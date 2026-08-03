@@ -45,6 +45,7 @@ const forbiddenContent = [
   /drwn store\b/,
   /drwn skills (?:curate|uncurate)\b/,
   /--no-apply\b/,
+  /drwn apply[^\n]*(?:--no-write|--json)\b/,
   /\b(?:persona|beliefs?|memory|BeginningDB|Mind Card|Mind tooling)\b/i,
 ];
 
@@ -72,10 +73,10 @@ test("Operator exposes exactly the approved eight Worker/Card skills", () => {
   assert.deepEqual(PRIMARY_STABLE_SKILLS, expectedSkills);
   assert.deepEqual(manifest.skills?.include, expectedSkills);
   assert.deepEqual(listDirs(join(operatorRoot, "skills")), [...expectedSkills].sort());
-  assert.equal(manifest.version, "2.0.1");
-  assert.equal(packageJson.version, "2.0.1");
-  assert.deepEqual(manifest.harness, { minVersion: "0.9.0" });
-  assert.equal(manifest.lastValidatedWith, "0.9.0");
+  assert.equal(manifest.version, "2.0.2");
+  assert.equal(packageJson.version, "2.0.2");
+  assert.deepEqual(manifest.harness, { minVersion: "1.1.0" });
+  assert.equal("lastValidatedWith" in manifest, false);
   assert.deepEqual(manifest.servers, {});
 });
 
