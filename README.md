@@ -125,9 +125,8 @@ DRWN_BIN="bun ~/dev/darwinian-minds/cli/index.ts" npm run smoke:cli
 
 ## Compatibility
 
-- Operator Card `2.0.2` requires `drwn` `1.1.0` or newer. It must not be
-  published or marked `lastValidatedWith` until I177's CLI and release checks
-  pass against the immutable Card source.
+- Operator Card `2.0.2` requires `drwn` `1.1.0` or newer and is validated
+  against that CLI release line.
 - Root skill bundle schema version 1.
 - Claude Code and Codex plugin manifests are versioned with the root package.
 

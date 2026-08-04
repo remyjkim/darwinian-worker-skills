@@ -76,7 +76,7 @@ test("Operator exposes exactly the approved eight Worker/Card skills", () => {
   assert.equal(manifest.version, "2.0.2");
   assert.equal(packageJson.version, "2.0.2");
   assert.deepEqual(manifest.harness, { minVersion: "1.1.0" });
-  assert.equal("lastValidatedWith" in manifest, false);
+  assert.equal(manifest.lastValidatedWith, "1.1.0");
   assert.deepEqual(manifest.servers, {});
 });
 

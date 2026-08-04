@@ -2,15 +2,29 @@
 // ABOUTME: Validates every local card source with the current drwn CLI.
 // ABOUTME: Uses DRWN_BIN for repo-local CLI smoke tests when provided.
 
-import { existsSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, rmSync } from "node:fs";
 import { spawnSync } from "node:child_process";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { cardMaps } from "./card-map.mjs";
 
 const drwnBin = process.env.DRWN_BIN || "drwn";
 const errors = [];
+const validationTmp = mkdtempSync(join(tmpdir(), "darwinian-worker-skills-validate-"));
+const validationHome = join(validationTmp, "home");
+const validationAgentsDir = join(validationTmp, "agents");
+mkdirSync(validationHome, { recursive: true });
+mkdirSync(validationAgentsDir, { recursive: true });
+process.on("exit", () => rmSync(validationTmp, { recursive: true, force: true }));
 
 function run(command) {
   const result = spawnSync(command, {
+    env: {
+      ...process.env,
+      HOME: validationHome,
+      AGENTS_DIR: validationAgentsDir,
+      DRWN_ANALYTICS_DISABLED: "1",
+    },
     shell: true,
     stdio: "pipe",
     encoding: "utf8",

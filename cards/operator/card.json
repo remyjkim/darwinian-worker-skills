@@ -17,5 +17,6 @@
   "servers": {},
   "harness": {
     "minVersion": "1.1.0"
-  }
+  },
+  "lastValidatedWith": "1.1.0"
 }
